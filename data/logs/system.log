@@ -1,0 +1,114 @@
+[2025-12-02T13:27:20Z] [INFO] Starting system monitoring collection
+[2025-12-02T13:27:20Z] [INFO] Running system_monitor.ps1
+[2025-12-02T13:27:22Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-02T13:27:22Z] [INFO] Running cpu_monitor.ps1
+[2025-12-02T13:27:27Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-02T13:27:27Z] [INFO] Running memory_monitor.ps1
+[2025-12-02T13:27:28Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-02T13:27:28Z] [INFO] Running disk_monitor.ps1
+[2025-12-02T13:27:29Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-02T13:27:29Z] [INFO] Running network_monitor.ps1
+[2025-12-02T13:27:32Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-02T13:27:32Z] [INFO] Running temperature_monitor.ps1
+[2025-12-02T13:27:34Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-02T13:27:34Z] [INFO] Running fan_monitor.ps1
+[2025-12-02T13:27:34Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-02T13:27:34Z] [INFO] Running smart_monitor.ps1
+[2025-12-02T13:27:35Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-02T13:27:35Z] [INFO] Merging JSON outputs
+[2025-12-02T13:27:36Z] [INFO] Monitoring collection completed
+[2025-12-02T13:28:16Z] [INFO] Starting system monitoring collection
+[2025-12-02T13:28:16Z] [INFO] Running system_monitor.ps1
+[2025-12-02T13:28:17Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-02T13:28:17Z] [INFO] Running cpu_monitor.ps1
+[2025-12-02T13:28:21Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-02T13:28:21Z] [INFO] Running memory_monitor.ps1
+[2025-12-02T13:28:22Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-02T13:28:22Z] [INFO] Running disk_monitor.ps1
+[2025-12-02T13:28:23Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-02T13:28:23Z] [INFO] Running network_monitor.ps1
+[2025-12-02T13:28:26Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-02T13:28:26Z] [INFO] Running temperature_monitor.ps1
+[2025-12-02T13:28:26Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-02T13:28:26Z] [INFO] Running fan_monitor.ps1
+[2025-12-02T13:28:27Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-02T13:28:27Z] [INFO] Running smart_monitor.ps1
+[2025-12-02T13:28:28Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-02T13:28:28Z] [INFO] Merging JSON outputs
+[2025-12-02T13:28:29Z] [INFO] Monitoring collection completed
+[2025-12-02T13:31:43Z] [INFO] Starting system monitoring collection
+[2025-12-02T13:31:43Z] [INFO] Running system_monitor.ps1
+[2025-12-02T13:31:44Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-02T13:31:44Z] [INFO] Running cpu_monitor.ps1
+[2025-12-02T13:31:48Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-02T13:31:48Z] [INFO] Running memory_monitor.ps1
+[2025-12-02T13:31:49Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-02T13:31:49Z] [INFO] Running disk_monitor.ps1
+[2025-12-02T13:31:50Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-02T13:31:50Z] [INFO] Running network_monitor.ps1
+[2025-12-02T13:31:53Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-02T13:31:53Z] [INFO] Running temperature_monitor.ps1
+[2025-12-02T13:31:53Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-02T13:31:53Z] [INFO] Running fan_monitor.ps1
+[2025-12-02T13:31:54Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-02T13:31:54Z] [INFO] Running smart_monitor.ps1
+[2025-12-02T13:31:55Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-02T13:31:55Z] [INFO] Merging JSON outputs
+[2025-12-02T13:31:55Z] [INFO] Monitoring collection completed
+[2025-12-02T13:34:05Z] [INFO] Starting system monitoring collection
+[2025-12-02T13:34:05Z] [INFO] Running system_monitor.ps1
+[2025-12-02T13:34:06Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-02T13:34:06Z] [INFO] Running cpu_monitor.ps1
+[2025-12-02T13:34:10Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-02T13:34:10Z] [INFO] Running memory_monitor.ps1
+[2025-12-02T13:34:11Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-02T13:34:11Z] [INFO] Running disk_monitor.ps1
+[2025-12-02T13:34:12Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-02T13:34:12Z] [INFO] Running network_monitor.ps1
+[2025-12-02T13:34:14Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-02T13:34:14Z] [INFO] Running temperature_monitor.ps1
+[2025-12-02T13:34:15Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-02T13:34:15Z] [INFO] Running fan_monitor.ps1
+[2025-12-02T13:34:16Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-02T13:34:16Z] [INFO] Running smart_monitor.ps1
+[2025-12-02T13:34:16Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-02T13:34:16Z] [INFO] Merging JSON outputs
+[2025-12-02T13:34:17Z] [INFO] Monitoring collection completed
+[2025-12-02T13:35:20Z] [INFO] Starting system monitoring collection
+[2025-12-02T13:35:20Z] [INFO] Running system_monitor.ps1
+[2025-12-02T13:35:21Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-02T13:35:21Z] [INFO] Running cpu_monitor.ps1
+[2025-12-02T13:35:26Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-02T13:35:26Z] [INFO] Running memory_monitor.ps1
+[2025-12-02T13:35:27Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-02T13:35:27Z] [INFO] Running disk_monitor.ps1
+[2025-12-02T13:35:27Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-02T13:35:27Z] [INFO] Running network_monitor.ps1
+[2025-12-02T13:35:30Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-02T13:35:30Z] [INFO] Running temperature_monitor.ps1
+[2025-12-02T13:35:30Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-02T13:35:30Z] [INFO] Running fan_monitor.ps1
+[2025-12-02T13:35:31Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-02T13:35:31Z] [INFO] Running smart_monitor.ps1
+[2025-12-02T13:35:32Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-02T13:35:32Z] [INFO] Merging JSON outputs
+[2025-12-02T13:35:32Z] [INFO] Monitoring collection completed
+[2025-12-02T13:36:34Z] [INFO] Starting system monitoring collection
+[2025-12-02T13:36:34Z] [INFO] Running system_monitor.ps1
+[2025-12-02T13:36:35Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-02T13:36:35Z] [INFO] Running cpu_monitor.ps1
+[2025-12-02T13:36:40Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-02T13:36:40Z] [INFO] Running memory_monitor.ps1
+[2025-12-02T13:36:41Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-02T13:36:41Z] [INFO] Running disk_monitor.ps1
+[2025-12-02T13:36:41Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-02T13:36:41Z] [INFO] Running network_monitor.ps1
+[2025-12-02T13:36:44Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-02T13:36:44Z] [INFO] Running temperature_monitor.ps1
+[2025-12-02T13:36:44Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-02T13:36:44Z] [INFO] Running fan_monitor.ps1
+[2025-12-02T13:36:45Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-02T13:36:45Z] [INFO] Running smart_monitor.ps1
+[2025-12-02T13:36:46Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-02T13:36:46Z] [INFO] Merging JSON outputs
+[2025-12-02T13:36:46Z] [INFO] Monitoring collection completed

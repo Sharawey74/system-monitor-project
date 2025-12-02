@@ -1,0 +1,73 @@
+﻿{
+    "fans":  {
+                 "status":  "unavailable"
+             },
+    "cpu":  {
+                "logical_processors":  8,
+                "load_1":  0,
+                "load_15":  0,
+                "load_5":  0,
+                "usage_percent":  20.3
+            },
+    "disk":  [
+                 {
+                     "filesystem":  "NTFS",
+                     "total_gb":  475.28,
+                     "used_gb":  353.51,
+                     "device":  "C:",
+                     "used_percent":  74.4
+                 },
+                 {
+                     "filesystem":  "NTFS",
+                     "total_gb":  465.76,
+                     "used_gb":  12.28,
+                     "device":  "D:",
+                     "used_percent":  2.6
+                 },
+                 {
+                     "filesystem":  "NTFS",
+                     "total_gb":  465.75,
+                     "used_gb":  4.24,
+                     "device":  "E:",
+                     "used_percent":  0.9
+                 }
+             ],
+    "memory":  {
+                   "available_mb":  6000,
+                   "total_mb":  16107,
+                   "free_mb":  6000,
+                   "used_mb":  10107
+               },
+    "timestamp":  "2025-12-02T13:36:46Z",
+    "system":  {
+                   "kernel":  "10.0.26200",
+                   "hostname":  "DESKTOP-T6GSL92",
+                   "uptime_seconds":  63723,
+                   "model":  "Vostro 3500",
+                   "manufacturer":  "Dell Inc.",
+                   "os":  "Microsoft Windows 11 Pro"
+               },
+    "smart":  {
+                  "status":  "restricted"
+              },
+    "network":  [
+                    {
+                        "rx_bytes":  0,
+                        "tx_bytes":  399462,
+                        "iface":  "vEthernet (Default Switch)"
+                    },
+                    {
+                        "rx_bytes":  2694284961,
+                        "tx_bytes":  240572727,
+                        "iface":  "Wi-Fi"
+                    },
+                    {
+                        "rx_bytes":  33870,
+                        "tx_bytes":  748359,
+                        "iface":  "vEthernet (WSL (Hyper-V firewall))"
+                    }
+                ],
+    "temperature":  {
+                        "status":  "unavailable"
+                    }
+}
