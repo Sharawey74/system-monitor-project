@@ -59,13 +59,89 @@ done
 
 # Merge all JSON files
 "${UTILS_DIR}/logger.sh" "INFO" "Merging JSON outputs"
-bash "${UTILS_DIR}/json_writer.sh" "${TEMP_DIR}" "${temp_files[@]}"
+
+PLATFORM_OUTPUT="${PROJECT_ROOT}/data/metrics/unix_current.json"
+LATEST_OUTPUT="${PROJECT_ROOT}/data/metrics/current.json"
+TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || date +"%Y-%m-%dT%H:%M:%SZ")
+
+# Build merged JSON with metadata and proper structure
+sections_added=0
+
+{
+    echo "{"
+    echo "  \"timestamp\": \"${TIMESTAMP}\","
+    echo "  \"platform\": \"unix\","
+    echo ""
+    
+    # Process each monitor
+    for file in "${temp_files[@]}"; do
+        if [ -f "${file}" ]; then
+            monitor_name=$(basename "${file}" .json)
+            
+            if content=$(cat "${file}" 2>/dev/null); then
+                # Skip empty content
+                if [ -z "${content}" ]; then
+                    continue
+                fi
+                
+                # Add comma and spacing after previous section
+                if [ ${sections_added} -gt 0 ]; then
+                    echo ","
+                    echo ""
+                fi
+                
+                # Determine content type and format accordingly
+                case "${monitor_name}" in
+                    system_monitor|cpu_monitor|memory_monitor|temperature_monitor|fan_monitor|smart_monitor)
+                        # Object types - extract inner content without leading/trailing braces
+                        inner=$(echo "${content}" | sed '1s/^{//; $s/}$//')
+                        
+                        # Determine key name
+                        key_name="${monitor_name%_monitor}"
+                        [ "${key_name}" = "fan" ] && key_name="fans"
+                        
+                        echo "  \"${key_name}\": {"
+                        echo "${inner}" | sed 's/^/    /'
+                        echo -n "  }"
+                        ;;
+                    disk_monitor|network_monitor)
+                        # Array types - use content as-is
+                        key_name="${monitor_name%_monitor}"
+                        echo -n "  \"${key_name}\": ${content}"
+                        ;;
+                    *)
+                        # Unknown type - wrap as object
+                        inner=$(echo "${content}" | sed '1s/^{//; $s/}$//')
+                        echo "  \"${monitor_name}\": {"
+                        echo "${inner}" | sed 's/^/    /'
+                        echo -n "  }"
+                        ;;
+                esac
+                
+                sections_added=$((sections_added + 1))
+                "${UTILS_DIR}/logger.sh" "INFO" "Successfully merged: $(basename "${file}")"
+            else
+                "${UTILS_DIR}/logger.sh" "ERROR" "Failed to read: $(basename "${file}")"
+            fi
+        fi
+    done
+    
+    echo ""
+    echo "}"
+} > "${LATEST_OUTPUT}"
+
+# Copy to platform-specific file
+cp "${LATEST_OUTPUT}" "${PLATFORM_OUTPUT}"
+"${UTILS_DIR}/logger.sh" "INFO" "Unix data written to unix_current.json"
+"${UTILS_DIR}/logger.sh" "INFO" "Latest data written to current.json"
 
 # Clean up temp files
 rm -rf "${TEMP_DIR}"
 
 "${UTILS_DIR}/logger.sh" "INFO" "Monitoring collection completed"
 
-echo "Monitoring data written to ${PROJECT_ROOT}/data/metrics/current.json"
+echo "Monitoring data written to:"
+echo "  - Platform-specific: ${PLATFORM_OUTPUT}"
+echo "  - Latest run: ${LATEST_OUTPUT}"
 
 exit 0

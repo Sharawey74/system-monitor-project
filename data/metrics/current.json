@@ -1,88 +1,50 @@
-﻿{
-    "fans":  [
-                 {
-                     "status":  "OK",
-                     "name":  "CPU Fan",
-                     "location":  "Processor cooling",
-                     "rpm":  "unavailable"
-                 },
-                 {
-                     "status":  "OK",
-                     "name":  "GPU Fan",
-                     "location":  "Graphics cooling",
-                     "rpm":  "unavailable"
-                 }
-             ],
-    "detection_method":  "Inferred (Gaming/High-Performance Laptop)",
-    "cpu":  {
-                "vendor":  "Intel",
-                "model":  "Intel(R) Core(TM) i7-14700HX",
-                "load_15":  0,
-                "load_1":  0,
-                "load_5":  0,
-                "usage_percent":  4.3,
-                "logical_processors":  28
-            },
-    "fan_count":  2,
-    "disk":  [
-                 {
-                     "filesystem":  "NTFS",
-                     "total_gb":  476.11,
-                     "used_gb":  299.69,
-                     "device":  "C:",
-                     "used_percent":  62.9
-                 }
-             ],
-    "memory":  {
-                   "modules":  [
-                                   {
-                                       "manufacturer":  "Ramaxel Technology",
-                                       "form_factor":  "SODIMM",
-                                       "capacity_gb":  12,
-                                       "type":  "DDR5",
-                                       "speed_mhz":  4800
-                                   },
-                                   {
-                                       "manufacturer":  "Ramaxel Technology",
-                                       "form_factor":  "SODIMM",
-                                       "capacity_gb":  12,
-                                       "type":  "DDR5",
-                                       "speed_mhz":  4800
-                                   }
-                               ],
-                   "available_mb":  14093,
-                   "total_mb":  24284,
-                   "free_mb":  14093,
-                   "used_mb":  10191
-               },
-    "timestamp":  "2025-12-03T17:36:37Z",
-    "system":  {
-                   "kernel":  "10.0.26200",
-                   "hostname":  "DESKTOP-5G0BPG5",
-                   "uptime_seconds":  77984,
-                   "model":  "83JE",
-                   "manufacturer":  "LENOVO",
-                   "os":  "Microsoft Windows 11 Pro"
-               },
-    "status":  "available",
-    "network":  [
-                    {
-                        "rx_bytes":  563142,
-                        "tx_bytes":  42214356,
-                        "iface":  "vEthernet (WSL (Hyper-V firewall))"
-                    },
-                    {
-                        "rx_bytes":  230928255,
-                        "tx_bytes":  126236118,
-                        "iface":  "Wi-Fi"
-                    }
-                ],
-    "smart":  {
-                  "status":  "restricted - requires administrator privileges"
-              },
-    "temperature":  {
-                        "cpu_celsius":  0,
-                        "gpu_celsius":  38,
-                        "gpu_vendor":  "NVIDIA"
-                    }
+{
+  "timestamp": "2025-12-03T20:32:25Z",
+  "platform": "unix",
+
+  "system": {
+    
+      "os": "Ubuntu 24.04.3 LTS",
+      "hostname": "DESKTOP-T6GSL92",
+      "uptime_seconds": 1067,
+      "kernel": "6.6.87.2-microsoft-standard-WSL2"
+  },
+
+  "cpu": {
+    
+      "usage_percent": 0.0,
+      "load_1": 0.12,
+      "load_5": 0.08,
+      "load_15": 0.02,
+      "logical_processors": 8,
+      "vendor": "Intel",
+      "model": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz"
+  },
+
+  "memory": {
+    
+      "total_mb": 7804,
+      "used_mb": 518,
+      "free_mb": 7176,
+      "available_mb": 7285
+  },
+
+  "disk": [{"device":"/usr/lib/modules/6.6.87.2-microsoft-standard-WSL2","filesystem":"none","total_gb":3.81,"used_gb":0.00,"used_percent":0.0},{"device":"/mnt/wsl","filesystem":"none","total_gb":3.81,"used_gb":0.00,"used_percent":0.0},{"device":"/usr/lib/wsl/drivers","filesystem":"drivers","total_gb":475.28,"used_gb":351.61,"used_percent":74.0},{"device":"/","filesystem":"/dev/sdd","total_gb":1006.85,"used_gb":3.93,"used_percent":0.4},{"device":"/mnt/wslg","filesystem":"none","total_gb":3.81,"used_gb":0.00,"used_percent":0.0},{"device":"/usr/lib/wsl/lib","filesystem":"none","total_gb":3.81,"used_gb":0.00,"used_percent":0.0},{"device":"/init","filesystem":"rootfs","total_gb":3.81,"used_gb":0.00,"used_percent":0.1},{"device":"/run","filesystem":"none","total_gb":3.81,"used_gb":0.00,"used_percent":0.0},{"device":"/run/lock","filesystem":"none","total_gb":3.81,"used_gb":0.00,"used_percent":0.0},{"device":"/run/shm","filesystem":"none","total_gb":3.81,"used_gb":0.00,"used_percent":0.0},{"device":"/mnt/wslg/versions.txt","filesystem":"none","total_gb":3.81,"used_gb":0.00,"used_percent":0.0},{"device":"/mnt/wslg/doc","filesystem":"none","total_gb":3.81,"used_gb":0.00,"used_percent":0.0},{"device":"/mnt/c","filesystem":"C:\\","total_gb":475.28,"used_gb":351.61,"used_percent":74.0},{"device":"/mnt/d","filesystem":"D:\\","total_gb":465.76,"used_gb":12.28,"used_percent":2.6},{"device":"/mnt/e","filesystem":"E:\\","total_gb":465.75,"used_gb":4.24,"used_percent":0.9}],
+
+  "network": [{"iface":"lo","rx_bytes":979,"tx_bytes":979},{"iface":"eth0","rx_bytes":5351,"tx_bytes":5968},{"iface":"docker0","rx_bytes":0,"tx_bytes":0}],
+
+  "temperature": {
+    
+      "status": "unavailable"
+  },
+
+  "fans": {
+    
+      "status": "unavailable"
+  },
+
+  "smart": {
+    
+      "status": "unavailable"
+  }
 }

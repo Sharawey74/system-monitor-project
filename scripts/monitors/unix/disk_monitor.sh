@@ -31,11 +31,15 @@ get_disk_stats() {
             local used_gb=$(awk "BEGIN {printf \"%.2f\", $used_kb / 1024 / 1024}")
             local used_percent=$(awk "BEGIN {printf \"%.1f\", ($used_kb / $total_kb) * 100}")
             
+            # Escape backslashes in device and mount paths for JSON
+            device_escaped=$(echo "$device" | sed 's/\\/\\\\/g')
+            mount_escaped=$(echo "$mount" | sed 's/\\/\\\\/g')
+            
             # Add to JSON array
             if [ "$first" = false ]; then
                 disks+=","
             fi
-            disks+="{\"device\":\"$mount\",\"filesystem\":\"$device\",\"total_gb\":$total_gb,\"used_gb\":$used_gb,\"used_percent\":$used_percent}"
+            disks+="{\"device\":\"$mount_escaped\",\"filesystem\":\"$device_escaped\",\"total_gb\":$total_gb,\"used_gb\":$used_gb,\"used_percent\":$used_percent}"
             first=false
         done < <(df -k 2>/dev/null)
     fi
