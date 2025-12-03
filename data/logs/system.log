@@ -1,76 +1,19 @@
-[2025-12-03T15:12:44Z] [INFO] Starting system monitoring collection
-[2025-12-03T15:12:44Z] [INFO] Running system_monitor.ps1
-[2025-12-03T15:12:44Z] [INFO] system_monitor.ps1 completed successfully
-[2025-12-03T15:12:44Z] [INFO] Running cpu_monitor.ps1
-[2025-12-03T15:12:53Z] [INFO] cpu_monitor.ps1 completed successfully
-[2025-12-03T15:12:53Z] [INFO] Running memory_monitor.ps1
-[2025-12-03T15:12:54Z] [INFO] memory_monitor.ps1 completed successfully
-[2025-12-03T15:12:54Z] [INFO] Running disk_monitor.ps1
-[2025-12-03T15:12:54Z] [INFO] disk_monitor.ps1 completed successfully
-[2025-12-03T15:12:54Z] [INFO] Running network_monitor.ps1
-[2025-12-03T15:12:56Z] [INFO] network_monitor.ps1 completed successfully
-[2025-12-03T15:12:56Z] [INFO] Running temperature_monitor.ps1
-[2025-12-03T15:12:58Z] [INFO] temperature_monitor.ps1 completed successfully
-[2025-12-03T15:12:58Z] [INFO] Running fan_monitor.ps1
-[2025-12-03T15:12:59Z] [INFO] fan_monitor.ps1 completed successfully
-[2025-12-03T15:12:59Z] [INFO] Running smart_monitor.ps1
-[2025-12-03T15:12:59Z] [INFO] smart_monitor.ps1 completed successfully
-[2025-12-03T15:12:59Z] [INFO] Merging JSON outputs
-[2025-12-03T15:12:59Z] [INFO] Monitoring collection completed
-[2025-12-03T15:15:28Z] [INFO] Starting system monitoring collection
-[2025-12-03T15:15:28Z] [INFO] Running system_monitor.ps1
-[2025-12-03T15:15:29Z] [INFO] system_monitor.ps1 completed successfully
-[2025-12-03T15:15:29Z] [INFO] Running cpu_monitor.ps1
-[2025-12-03T15:15:38Z] [INFO] cpu_monitor.ps1 completed successfully
-[2025-12-03T15:15:38Z] [INFO] Running memory_monitor.ps1
-[2025-12-03T15:15:38Z] [INFO] memory_monitor.ps1 completed successfully
-[2025-12-03T15:15:38Z] [INFO] Running disk_monitor.ps1
-[2025-12-03T15:15:38Z] [INFO] disk_monitor.ps1 completed successfully
-[2025-12-03T15:15:38Z] [INFO] Running network_monitor.ps1
-[2025-12-03T15:15:39Z] [INFO] network_monitor.ps1 completed successfully
-[2025-12-03T15:15:39Z] [INFO] Running temperature_monitor.ps1
-[2025-12-03T15:15:41Z] [INFO] temperature_monitor.ps1 completed successfully
-[2025-12-03T15:15:41Z] [INFO] Running fan_monitor.ps1
-[2025-12-03T15:15:41Z] [INFO] fan_monitor.ps1 completed successfully
-[2025-12-03T15:15:41Z] [INFO] Running smart_monitor.ps1
-[2025-12-03T15:15:41Z] [INFO] smart_monitor.ps1 completed successfully
-[2025-12-03T15:15:41Z] [INFO] Merging JSON outputs
-[2025-12-03T15:15:41Z] [INFO] Monitoring collection completed
-[2025-12-03T15:15:41Z] [INFO] Starting system monitoring collection
-[2025-12-03T15:15:41Z] [INFO] Running system_monitor.ps1
-[2025-12-03T15:15:42Z] [INFO] system_monitor.ps1 completed successfully
-[2025-12-03T15:15:42Z] [INFO] Running cpu_monitor.ps1
-[2025-12-03T15:15:48Z] [INFO] cpu_monitor.ps1 completed successfully
-[2025-12-03T15:15:48Z] [INFO] Running memory_monitor.ps1
-[2025-12-03T15:15:48Z] [INFO] memory_monitor.ps1 completed successfully
-[2025-12-03T15:15:48Z] [INFO] Running disk_monitor.ps1
-[2025-12-03T15:15:49Z] [INFO] disk_monitor.ps1 completed successfully
-[2025-12-03T15:15:49Z] [INFO] Running network_monitor.ps1
-[2025-12-03T15:15:49Z] [INFO] network_monitor.ps1 completed successfully
-[2025-12-03T15:15:49Z] [INFO] Running temperature_monitor.ps1
-[2025-12-03T15:15:50Z] [INFO] temperature_monitor.ps1 completed successfully
-[2025-12-03T15:15:50Z] [INFO] Running fan_monitor.ps1
-[2025-12-03T15:15:50Z] [INFO] fan_monitor.ps1 completed successfully
-[2025-12-03T15:15:50Z] [INFO] Running smart_monitor.ps1
-[2025-12-03T15:15:50Z] [INFO] smart_monitor.ps1 completed successfully
-[2025-12-03T15:15:50Z] [INFO] Merging JSON outputs
-[2025-12-03T15:15:50Z] [INFO] Monitoring collection completed
-[2025-12-03T15:17:14Z] [INFO] Starting system monitoring collection
-[2025-12-03T15:17:14Z] [INFO] Running system_monitor.ps1
-[2025-12-03T15:17:15Z] [INFO] system_monitor.ps1 completed successfully
-[2025-12-03T15:17:15Z] [INFO] Running cpu_monitor.ps1
-[2025-12-03T15:17:24Z] [INFO] cpu_monitor.ps1 completed successfully
-[2025-12-03T15:17:24Z] [INFO] Running memory_monitor.ps1
-[2025-12-03T15:17:25Z] [INFO] memory_monitor.ps1 completed successfully
-[2025-12-03T15:17:25Z] [INFO] Running disk_monitor.ps1
-[2025-12-03T15:17:25Z] [INFO] disk_monitor.ps1 completed successfully
-[2025-12-03T15:17:25Z] [INFO] Running network_monitor.ps1
-[2025-12-03T15:17:27Z] [INFO] network_monitor.ps1 completed successfully
-[2025-12-03T15:17:27Z] [INFO] Running temperature_monitor.ps1
-[2025-12-03T15:17:29Z] [INFO] temperature_monitor.ps1 completed successfully
-[2025-12-03T15:17:29Z] [INFO] Running fan_monitor.ps1
-[2025-12-03T15:17:30Z] [INFO] fan_monitor.ps1 completed successfully
-[2025-12-03T15:17:30Z] [INFO] Running smart_monitor.ps1
-[2025-12-03T15:17:30Z] [INFO] smart_monitor.ps1 completed successfully
-[2025-12-03T15:17:30Z] [INFO] Merging JSON outputs
-[2025-12-03T15:17:30Z] [INFO] Monitoring collection completed
+[2025-12-03T16:48:35Z] [INFO] Starting system monitoring collection
+[2025-12-03T16:48:35Z] [INFO] Running system_monitor.ps1
+[2025-12-03T16:48:36Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-03T16:48:36Z] [INFO] Running cpu_monitor.ps1
+[2025-12-03T16:48:45Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-03T16:48:45Z] [INFO] Running memory_monitor.ps1
+[2025-12-03T16:48:46Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-03T16:48:46Z] [INFO] Running disk_monitor.ps1
+[2025-12-03T16:48:47Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-03T16:48:47Z] [INFO] Running network_monitor.ps1
+[2025-12-03T16:48:49Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-03T16:48:49Z] [INFO] Running temperature_monitor.ps1
+[2025-12-03T16:48:51Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-03T16:48:51Z] [INFO] Running fan_monitor.ps1
+[2025-12-03T16:48:51Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-03T16:48:51Z] [INFO] Running smart_monitor.ps1
+[2025-12-03T16:48:52Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-03T16:48:52Z] [INFO] Merging JSON outputs
+[2025-12-03T16:48:52Z] [INFO] Monitoring collection completed

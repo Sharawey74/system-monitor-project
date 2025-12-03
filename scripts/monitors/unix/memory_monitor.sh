@@ -49,10 +49,74 @@ get_memory_stats() {
     echo "$total_mb" "$used_mb" "$free_mb" "$available_mb"
 }
 
+get_ram_modules() {
+    local modules=""
+    
+    if command -v dmidecode &> /dev/null && [ -r /dev/mem ]; then
+        # Linux with dmidecode (requires root)
+        modules=$(sudo dmidecode -t memory 2>/dev/null | awk '
+            /Memory Device$/,/^$/ {
+                if ($1 == "Size:" && $2 != "No" && $2 ~ /^[0-9]+/) {
+                    size = $2
+                    if ($3 == "GB") size = $2
+                    else if ($3 == "MB") size = $2 / 1024
+                }
+                if ($1 == "Manufacturer:") manufacturer = substr($0, index($0,$2))
+                if ($1 == "Speed:") speed = $2
+                if ($1 == "Type:") mem_type = $2
+                if ($1 == "Form" && $2 == "Factor:") form_factor = $3
+            }
+            /^$/ {
+                if (size > 0) {
+                    if (modules != "") modules = modules ","
+                    modules = modules sprintf("{\"manufacturer\":\"%s\",\"capacity_gb\":%.2f,\"speed_mhz\":%s,\"type\":\"%s\",\"form_factor\":\"%s\"}", 
+                        manufacturer, size, speed, mem_type, form_factor)
+                    size = 0
+                }
+            }
+            END { print modules }
+        ')
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        local mem_info=$(system_profiler SPMemoryDataType 2>/dev/null)
+        if [ -n "$mem_info" ]; then
+            modules=$(echo "$mem_info" | awk '
+                /Size:/ { size = $2; gsub(/GB/, "", size) }
+                /Type:/ { mem_type = $2 }
+                /Speed:/ { speed = $2; gsub(/MHz/, "", speed) }
+                /Manufacturer:/ { 
+                    manufacturer = substr($0, index($0,$2))
+                    if (size > 0) {
+                        if (modules != "") modules = modules ","
+                        modules = modules sprintf("{\"manufacturer\":\"%s\",\"capacity_gb\":%.2f,\"speed_mhz\":%s,\"type\":\"%s\",\"form_factor\":\"SODIMM\"}", 
+                            manufacturer, size, speed, mem_type)
+                        size = 0
+                    }
+                }
+                END { print modules }
+            ')
+        fi
+    fi
+    
+    echo "$modules"
+}
+
 # Get memory statistics
 read total_mb used_mb free_mb available_mb <<< $(get_memory_stats)
+ram_modules=$(get_ram_modules)
 
 # Output JSON
+if [ -n "$ram_modules" ]; then
+cat <<EOF
+{
+  "total_mb": ${total_mb:-0},
+  "used_mb": ${used_mb:-0},
+  "free_mb": ${free_mb:-0},
+  "available_mb": ${available_mb:-0},
+  "modules": [${ram_modules}]
+}
+EOF
+else
 cat <<EOF
 {
   "total_mb": ${total_mb:-0},
@@ -61,5 +125,6 @@ cat <<EOF
   "available_mb": ${available_mb:-0}
 }
 EOF
+fi
 
 exit 0

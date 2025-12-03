@@ -58,9 +58,62 @@ get_load_averages() {
     echo "$load_1" "$load_5" "$load_15"
 }
 
+get_cpu_vendor() {
+    local vendor="unknown"
+    
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        vendor=$(sysctl -n machdep.cpu.brand_string 2>/dev/null | awk '{print $1}')
+    elif [ -f /proc/cpuinfo ]; then
+        # Linux
+        local vendor_id=$(grep -m1 "vendor_id" /proc/cpuinfo | cut -d: -f2 | xargs)
+        case "$vendor_id" in
+            GenuineIntel) vendor="Intel" ;;
+            AuthenticAMD) vendor="AMD" ;;
+            *) vendor="$vendor_id" ;;
+        esac
+    fi
+    
+    echo "${vendor:-unknown}"
+}
+
+get_cpu_model() {
+    local model="unknown"
+    
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        model=$(sysctl -n machdep.cpu.brand_string 2>/dev/null)
+    elif [ -f /proc/cpuinfo ]; then
+        # Linux
+        model=$(grep -m1 "model name" /proc/cpuinfo | cut -d: -f2 | xargs)
+    fi
+    
+    echo "${model:-unknown}"
+}
+
+get_logical_processors() {
+    local processors=0
+    
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        processors=$(sysctl -n hw.logicalcpu 2>/dev/null)
+    elif command -v nproc &> /dev/null; then
+        # Linux with nproc
+        processors=$(nproc)
+    elif [ -f /proc/cpuinfo ]; then
+        # Linux fallback
+        processors=$(grep -c ^processor /proc/cpuinfo)
+    fi
+    
+    echo "${processors:-0}"
+}
+
 # Get CPU metrics
 cpu_usage=$(get_cpu_usage)
 read load_1 load_5 load_15 <<< $(get_load_averages)
+cpu_vendor=$(get_cpu_vendor)
+cpu_model=$(get_cpu_model)
+logical_processors=$(get_logical_processors)
 
 # Output JSON
 cat <<EOF
@@ -68,7 +121,10 @@ cat <<EOF
   "usage_percent": ${cpu_usage},
   "load_1": ${load_1:-0},
   "load_5": ${load_5:-0},
-  "load_15": ${load_15:-0}
+  "load_15": ${load_15:-0},
+  "logical_processors": ${logical_processors},
+  "vendor": "${cpu_vendor}",
+  "model": "${cpu_model}"
 }
 EOF
 

@@ -18,6 +18,15 @@ function Get-CpuMetrics {
         $processors = Get-CimInstance Win32_Processor -ErrorAction Stop
         $logicalProcessors = ($processors | Measure-Object -Property NumberOfLogicalProcessors -Sum).Sum
         
+        # Get CPU vendor and model
+        $firstProcessor = $processors | Select-Object -First 1
+        $cpuVendor = switch ($firstProcessor.Manufacturer) {
+            "GenuineIntel" { "Intel" }
+            "AuthenticAMD" { "AMD" }
+            default { $firstProcessor.Manufacturer }
+        }
+        $cpuModel = $firstProcessor.Name.Trim()
+        
         # Windows doesn't have load averages like Unix, so we'll use queue length as approximation
         $queueLength = (Get-Counter '\System\Processor Queue Length' -ErrorAction SilentlyContinue).CounterSamples[0].CookedValue
         
@@ -31,6 +40,8 @@ function Get-CpuMetrics {
                 load_5 = $load
                 load_15 = $load
                 logical_processors = $logicalProcessors
+                vendor = $cpuVendor
+                model = $cpuModel
             }
         }
         

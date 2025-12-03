@@ -3,32 +3,50 @@
                  "status":  "unavailable"
              },
     "cpu":  {
-                "logical_processors":  28,
-                "load_1":  0,
+                "vendor":  "Intel",
+                "model":  "Intel(R) Core(TM) i7-14700HX",
                 "load_15":  0,
+                "load_1":  0,
                 "load_5":  0,
-                "usage_percent":  5.3
+                "usage_percent":  7.2,
+                "logical_processors":  28
             },
     "disk":  [
                  {
                      "filesystem":  "NTFS",
                      "total_gb":  476.11,
-                     "used_gb":  299.59,
+                     "used_gb":  299.67,
                      "device":  "C:",
                      "used_percent":  62.9
                  }
              ],
     "memory":  {
-                   "available_mb":  14546,
+                   "modules":  [
+                                   {
+                                       "manufacturer":  "Ramaxel Technology",
+                                       "form_factor":  "SODIMM",
+                                       "capacity_gb":  12,
+                                       "type":  "DDR5",
+                                       "speed_mhz":  4800
+                                   },
+                                   {
+                                       "manufacturer":  "Ramaxel Technology",
+                                       "form_factor":  "SODIMM",
+                                       "capacity_gb":  12,
+                                       "type":  "DDR5",
+                                       "speed_mhz":  4800
+                                   }
+                               ],
+                   "available_mb":  14087,
                    "total_mb":  24284,
-                   "free_mb":  14546,
-                   "used_mb":  9738
+                   "free_mb":  14087,
+                   "used_mb":  10197
                },
-    "timestamp":  "2025-12-03T15:17:30Z",
+    "timestamp":  "2025-12-03T16:48:52Z",
     "system":  {
                    "kernel":  "10.0.26200",
                    "hostname":  "DESKTOP-5G0BPG5",
-                   "uptime_seconds":  69637,
+                   "uptime_seconds":  75117,
                    "model":  "83JE",
                    "manufacturer":  "LENOVO",
                    "os":  "Microsoft Windows 11 Pro"
@@ -39,18 +57,18 @@
     "network":  [
                     {
                         "rx_bytes":  563142,
-                        "tx_bytes":  42043128,
+                        "tx_bytes":  42154635,
                         "iface":  "vEthernet (WSL (Hyper-V firewall))"
                     },
                     {
-                        "rx_bytes":  184640422,
-                        "tx_bytes":  29135822,
+                        "rx_bytes":  215870515,
+                        "tx_bytes":  98273314,
                         "iface":  "Wi-Fi"
                     }
                 ],
     "temperature":  {
                         "cpu_celsius":  27.9,
-                        "gpu_celsius":  36,
+                        "gpu_celsius":  38,
                         "gpu_vendor":  "NVIDIA"
                     }
 }
