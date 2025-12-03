@@ -1,0 +1,55 @@
+﻿{
+  "timestamp": "2025-12-03T11:56:28Z",
+  "system": {
+    "os": "Kali GNU/Linux Rolling",
+    "hostname": "mistera",
+    "uptime_seconds": 3715,
+    "kernel": "6.16.8+kali-amd64"
+  },
+  "cpu": {
+    "usage_percent": 2.26,
+    "load_1": 0.15,
+    "load_5": 0.16,
+    "load_15": 0.10
+  },
+  "memory": {
+    "total_mb": 3883,
+    "used_mb": 1121,
+    "free_mb": 1953,
+    "available_mb": 2761
+  },
+  "disk": [
+    {
+      "device": "/",
+      "filesystem": "/dev/sda1",
+      "total_gb": 37.02,
+      "used_gb": 19.73,
+      "used_percent": 53.3
+    }
+  ],
+  "network": [
+    {
+      "iface": "lo",
+      "rx_bytes": 480,
+      "tx_bytes": 480
+    },
+    {
+      "iface": "eth0",
+      "rx_bytes": 78836987,
+      "tx_bytes": 691398
+    }
+  ],
+  "temperature": {
+    "status": "unavailable"
+  },
+  "fan": {
+    "status": "unavailable"
+  },
+  "smart": [
+    {
+      "device": "/dev/sda",
+      "health": "UNKNOWN",
+      "power_on_hours": 0
+    }
+  ]
+}
