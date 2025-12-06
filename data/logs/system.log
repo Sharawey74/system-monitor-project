@@ -1,0 +1,435 @@
+[2025-12-05T23:02:30Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:02:30Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:02:32Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:02:32Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:02:43Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:02:43Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:02:44Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:02:44Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:02:44Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:02:44Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:02:49Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:02:49Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:02:53Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:02:53Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:02:55Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:02:55Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:02:59Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:02:59Z] [INFO] Merging JSON outputs
+[2025-12-05T23:03:00Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:03:00Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:03:00Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:03:00Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:03:00Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:03:00Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:03:00Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:03:00Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:03:00Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:03:00Z] [INFO] Latest data written to current.json
+[2025-12-05T23:03:00Z] [INFO] Monitoring collection completed
+[2025-12-05T23:05:53Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:05:53Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:05:54Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:05:54Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:06:05Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:06:05Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:06:07Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:06:07Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:06:08Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:06:08Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:06:15Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:06:15Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:06:18Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:06:18Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:06:21Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:06:21Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:06:23Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:06:23Z] [INFO] Merging JSON outputs
+[2025-12-05T23:06:23Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:06:23Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:06:23Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:06:23Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:06:23Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:06:23Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:06:23Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:06:23Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:06:23Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:06:23Z] [INFO] Latest data written to current.json
+[2025-12-05T23:06:23Z] [INFO] Monitoring collection completed
+[2025-12-05T23:08:12Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:08:12Z] [INFO] Running system_monitor.sh
+[2025-12-05T23:08:12Z] [INFO] system_monitor.sh completed successfully
+[2025-12-05T23:08:12Z] [INFO] Running cpu_monitor.sh
+[2025-12-05T23:08:16Z] [INFO] cpu_monitor.sh completed successfully
+[2025-12-05T23:08:16Z] [INFO] Running memory_monitor.sh
+[2025-12-05T23:08:16Z] [INFO] memory_monitor.sh completed successfully
+[2025-12-05T23:08:16Z] [INFO] Running disk_monitor.sh
+[2025-12-05T23:08:17Z] [INFO] disk_monitor.sh completed successfully
+[2025-12-05T23:08:17Z] [INFO] Running network_monitor.sh
+[2025-12-05T23:08:17Z] [INFO] network_monitor.sh completed successfully
+[2025-12-05T23:08:17Z] [INFO] Running temperature_monitor.sh
+[2025-12-05T23:08:19Z] [INFO] temperature_monitor.sh completed successfully
+[2025-12-05T23:08:19Z] [INFO] Running fan_monitor.sh
+[2025-12-05T23:08:19Z] [INFO] fan_monitor.sh completed successfully
+[2025-12-05T23:08:19Z] [INFO] Running smart_monitor.sh
+[2025-12-05T23:08:19Z] [INFO] smart_monitor.sh completed successfully
+[2025-12-05T23:08:19Z] [INFO] Merging JSON outputs
+[2025-12-05T23:08:19Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:08:20Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:08:20Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:08:20Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:08:20Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:08:20Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:08:20Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:08:20Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:08:20Z] [INFO] Unix data written to unix_current.json
+[2025-12-05T23:08:20Z] [INFO] Latest data written to current.json
+[2025-12-05T23:08:20Z] [INFO] Monitoring collection completed
+[2025-12-05T23:09:02Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:09:02Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:09:03Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:09:03Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:09:12Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:09:12Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:09:13Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:09:13Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:09:14Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:09:14Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:09:17Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:09:17Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:09:19Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:09:19Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:09:21Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:09:21Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:09:24Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:09:24Z] [INFO] Merging JSON outputs
+[2025-12-05T23:09:24Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:09:24Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:09:24Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:09:24Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:09:24Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:09:24Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:09:24Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:09:24Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:09:24Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:09:24Z] [INFO] Latest data written to current.json
+[2025-12-05T23:09:24Z] [INFO] Monitoring collection completed
+[2025-12-05T23:10:55Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:10:55Z] [INFO] Running system_monitor.sh
+[2025-12-05T23:10:55Z] [INFO] system_monitor.sh completed successfully
+[2025-12-05T23:10:55Z] [INFO] Running cpu_monitor.sh
+[2025-12-05T23:10:58Z] [INFO] cpu_monitor.sh completed successfully
+[2025-12-05T23:10:59Z] [INFO] Running memory_monitor.sh
+[2025-12-05T23:10:59Z] [INFO] memory_monitor.sh completed successfully
+[2025-12-05T23:10:59Z] [INFO] Running disk_monitor.sh
+[2025-12-05T23:10:59Z] [INFO] disk_monitor.sh completed successfully
+[2025-12-05T23:10:59Z] [INFO] Running network_monitor.sh
+[2025-12-05T23:11:00Z] [INFO] network_monitor.sh completed successfully
+[2025-12-05T23:11:00Z] [INFO] Running temperature_monitor.sh
+[2025-12-05T23:11:01Z] [INFO] temperature_monitor.sh completed successfully
+[2025-12-05T23:11:01Z] [INFO] Running fan_monitor.sh
+[2025-12-05T23:11:02Z] [INFO] fan_monitor.sh completed successfully
+[2025-12-05T23:11:02Z] [INFO] Running smart_monitor.sh
+[2025-12-05T23:11:02Z] [INFO] smart_monitor.sh completed successfully
+[2025-12-05T23:11:02Z] [INFO] Merging JSON outputs
+[2025-12-05T23:11:02Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:11:02Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:11:02Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:11:02Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:11:02Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:11:02Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:11:02Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:11:03Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:11:03Z] [INFO] Unix data written to unix_current.json
+[2025-12-05T23:11:03Z] [INFO] Latest data written to current.json
+[2025-12-05T23:11:03Z] [INFO] Monitoring collection completed
+[2025-12-05T23:12:48Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:12:48Z] [INFO] Running system_monitor.sh
+[2025-12-05T23:12:48Z] [INFO] system_monitor.sh completed successfully
+[2025-12-05T23:12:48Z] [INFO] Running cpu_monitor.sh
+[2025-12-05T23:12:52Z] [INFO] cpu_monitor.sh completed successfully
+[2025-12-05T23:12:52Z] [INFO] Running memory_monitor.sh
+[2025-12-05T23:12:52Z] [INFO] memory_monitor.sh completed successfully
+[2025-12-05T23:12:52Z] [INFO] Running disk_monitor.sh
+[2025-12-05T23:12:52Z] [INFO] disk_monitor.sh completed successfully
+[2025-12-05T23:12:52Z] [INFO] Running network_monitor.sh
+[2025-12-05T23:12:52Z] [INFO] network_monitor.sh completed successfully
+[2025-12-05T23:12:52Z] [INFO] Running temperature_monitor.sh
+[2025-12-05T23:12:54Z] [INFO] temperature_monitor.sh completed successfully
+[2025-12-05T23:12:54Z] [INFO] Running fan_monitor.sh
+[2025-12-05T23:12:54Z] [INFO] fan_monitor.sh completed successfully
+[2025-12-05T23:12:54Z] [INFO] Running smart_monitor.sh
+[2025-12-05T23:12:55Z] [INFO] smart_monitor.sh completed successfully
+[2025-12-05T23:12:55Z] [INFO] Merging JSON outputs
+[2025-12-05T23:12:55Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:12:55Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:12:55Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:12:55Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:12:55Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:12:55Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:12:55Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:12:55Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:12:55Z] [INFO] Unix data written to unix_current.json
+[2025-12-05T23:12:55Z] [INFO] Latest data written to current.json
+[2025-12-05T23:12:55Z] [INFO] Monitoring collection completed
+[2025-12-05T23:13:21Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:13:21Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:13:22Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:13:22Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:13:33Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:13:33Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:13:34Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:13:34Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:13:36Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:13:36Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:13:42Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:13:42Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:13:45Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:13:45Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:13:49Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:13:49Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:13:55Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:13:55Z] [INFO] Merging JSON outputs
+[2025-12-05T23:13:55Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:13:55Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:13:55Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:13:55Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:13:55Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:13:55Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:13:55Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:13:55Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:13:55Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:13:55Z] [INFO] Latest data written to current.json
+[2025-12-05T23:13:55Z] [INFO] Monitoring collection completed
+[2025-12-05T23:30:35Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:30:35Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:30:36Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:30:36Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:30:48Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:30:48Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:30:50Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:30:50Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:30:52Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:30:52Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:30:58Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:30:58Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:31:03Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:31:03Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:31:07Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:31:07Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:31:08Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:31:08Z] [INFO] Merging JSON outputs
+[2025-12-05T23:31:09Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:31:09Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:31:09Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:31:09Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:31:09Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:31:09Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:31:09Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:31:09Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:31:09Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:31:09Z] [INFO] Latest data written to current.json
+[2025-12-05T23:31:09Z] [INFO] Monitoring collection completed
+[2025-12-05T23:38:35Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:38:35Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:38:36Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:38:36Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:38:47Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:38:47Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:38:49Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:38:49Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:38:51Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:38:51Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:38:57Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:38:57Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:39:02Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:39:02Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:39:05Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:39:05Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:39:07Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:39:07Z] [INFO] Merging JSON outputs
+[2025-12-05T23:39:07Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:39:07Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:39:07Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:39:07Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:39:07Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:39:07Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:39:07Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:39:07Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:39:07Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:39:07Z] [INFO] Latest data written to current.json
+[2025-12-05T23:39:07Z] [INFO] Monitoring collection completed
+[2025-12-05T23:42:42Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:42:42Z] [INFO] Running system_monitor.sh
+[2025-12-05T23:42:42Z] [INFO] system_monitor.sh completed successfully
+[2025-12-05T23:42:42Z] [INFO] Running cpu_monitor.sh
+[2025-12-05T23:42:46Z] [INFO] cpu_monitor.sh completed successfully
+[2025-12-05T23:42:46Z] [INFO] Running memory_monitor.sh
+[2025-12-05T23:42:46Z] [INFO] memory_monitor.sh completed successfully
+[2025-12-05T23:42:46Z] [INFO] Running disk_monitor.sh
+[2025-12-05T23:42:47Z] [INFO] disk_monitor.sh completed successfully
+[2025-12-05T23:42:47Z] [INFO] Running network_monitor.sh
+[2025-12-05T23:42:47Z] [INFO] network_monitor.sh completed successfully
+[2025-12-05T23:42:47Z] [INFO] Running temperature_monitor.sh
+[2025-12-05T23:42:49Z] [INFO] temperature_monitor.sh completed successfully
+[2025-12-05T23:42:49Z] [INFO] Running fan_monitor.sh
+[2025-12-05T23:42:49Z] [INFO] fan_monitor.sh completed successfully
+[2025-12-05T23:42:49Z] [INFO] Running smart_monitor.sh
+[2025-12-05T23:42:50Z] [INFO] smart_monitor.sh completed successfully
+[2025-12-05T23:42:50Z] [INFO] Merging JSON outputs
+[2025-12-05T23:42:50Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:42:50Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:42:50Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:42:50Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:42:50Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:42:50Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:42:50Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:42:50Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:42:50Z] [INFO] Unix data written to unix_current.json
+[2025-12-05T23:42:50Z] [INFO] Latest data written to current.json
+[2025-12-05T23:42:50Z] [INFO] Monitoring collection completed
+[2025-12-05T23:45:55Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:45:55Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:45:56Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:45:56Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:46:06Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:46:06Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:46:08Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:46:08Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:46:09Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:46:09Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:46:16Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:46:16Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:46:20Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:46:20Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:46:24Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:46:24Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:46:26Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:46:26Z] [INFO] Merging JSON outputs
+[2025-12-05T23:46:26Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:46:26Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:46:26Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:46:26Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:46:26Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:46:26Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:46:26Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:46:26Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:46:26Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:46:26Z] [INFO] Latest data written to current.json
+[2025-12-05T23:46:26Z] [INFO] Monitoring collection completed
+[2025-12-05T23:49:55Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:49:55Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:49:56Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:49:56Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:50:06Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:50:06Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:50:08Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:50:08Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:50:09Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:50:09Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:50:15Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:50:15Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:50:19Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:50:19Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:50:23Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:50:23Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:50:30Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:50:30Z] [INFO] Merging JSON outputs
+[2025-12-05T23:50:30Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:50:30Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:50:30Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:50:30Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:50:30Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:50:30Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:50:30Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:50:30Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:50:30Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:50:30Z] [INFO] Latest data written to current.json
+[2025-12-05T23:50:30Z] [INFO] Monitoring collection completed
+[2025-12-05T23:52:48Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:52:48Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:52:49Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:52:49Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:53:01Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:53:01Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:53:03Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:53:03Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:53:04Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:53:04Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:53:10Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:53:10Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:53:14Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:53:14Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:53:18Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:53:18Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:53:23Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:53:23Z] [INFO] Merging JSON outputs
+[2025-12-05T23:53:23Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:53:23Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:53:23Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:53:23Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:53:23Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:53:23Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:53:23Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:53:23Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:53:23Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:53:23Z] [INFO] Latest data written to current.json
+[2025-12-05T23:53:23Z] [INFO] Monitoring collection completed
+[2025-12-05T23:54:55Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:54:55Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:54:56Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:54:56Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:55:07Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:55:07Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:55:08Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:55:08Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:55:09Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:55:09Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:55:12Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:55:12Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:55:16Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:55:16Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:55:19Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:55:19Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:55:25Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:55:25Z] [INFO] Merging JSON outputs
+[2025-12-05T23:55:26Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:55:26Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:55:26Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:55:26Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:55:26Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:55:26Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:55:26Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:55:26Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:55:26Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:55:26Z] [INFO] Latest data written to current.json
+[2025-12-05T23:55:26Z] [INFO] Monitoring collection completed
+[2025-12-05T23:56:54Z] [INFO] Starting system monitoring collection
+[2025-12-05T23:56:54Z] [INFO] Running system_monitor.ps1
+[2025-12-05T23:56:55Z] [INFO] system_monitor.ps1 completed successfully
+[2025-12-05T23:56:55Z] [INFO] Running cpu_monitor.ps1
+[2025-12-05T23:57:06Z] [INFO] cpu_monitor.ps1 completed successfully
+[2025-12-05T23:57:06Z] [INFO] Running memory_monitor.ps1
+[2025-12-05T23:57:07Z] [INFO] memory_monitor.ps1 completed successfully
+[2025-12-05T23:57:07Z] [INFO] Running disk_monitor.ps1
+[2025-12-05T23:57:09Z] [INFO] disk_monitor.ps1 completed successfully
+[2025-12-05T23:57:09Z] [INFO] Running network_monitor.ps1
+[2025-12-05T23:57:14Z] [INFO] network_monitor.ps1 completed successfully
+[2025-12-05T23:57:14Z] [INFO] Running temperature_monitor.ps1
+[2025-12-05T23:57:18Z] [INFO] temperature_monitor.ps1 completed successfully
+[2025-12-05T23:57:18Z] [INFO] Running fan_monitor.ps1
+[2025-12-05T23:57:22Z] [INFO] fan_monitor.ps1 completed successfully
+[2025-12-05T23:57:22Z] [INFO] Running smart_monitor.ps1
+[2025-12-05T23:57:27Z] [INFO] smart_monitor.ps1 completed successfully
+[2025-12-05T23:57:28Z] [INFO] Merging JSON outputs
+[2025-12-05T23:57:28Z] [INFO] Successfully merged: system_monitor.json
+[2025-12-05T23:57:28Z] [INFO] Successfully merged: cpu_monitor.json
+[2025-12-05T23:57:28Z] [INFO] Successfully merged: memory_monitor.json
+[2025-12-05T23:57:28Z] [INFO] Successfully merged: disk_monitor.json
+[2025-12-05T23:57:28Z] [INFO] Successfully merged: network_monitor.json
+[2025-12-05T23:57:28Z] [INFO] Successfully merged: temperature_monitor.json
+[2025-12-05T23:57:28Z] [INFO] Successfully merged: fan_monitor.json
+[2025-12-05T23:57:28Z] [INFO] Successfully merged: smart_monitor.json
+[2025-12-05T23:57:28Z] [INFO] Windows data written to windows_current.json
+[2025-12-05T23:57:28Z] [INFO] Latest data written to current.json
+[2025-12-05T23:57:28Z] [INFO] Monitoring collection completed

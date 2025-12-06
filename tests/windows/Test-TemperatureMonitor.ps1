@@ -40,8 +40,43 @@ try {
     }
     else {
         Write-Host "Status: ok"
-        Write-Host "CPU Temperature: $($json.cpu_celsius)°C"
-        Write-Host "GPU Temperature: $($json.gpu_celsius)°C"
+        
+        # Display CPU temperature
+        $cpuTemp = $json.cpu.temperature_celsius
+        if ($cpuTemp -gt 0) {
+            Write-Host "CPU Temperature: $($cpuTemp)°C"
+        } else {
+            Write-Host "CPU Temperature: N/A"
+        }
+        
+        # Display GPU information
+        Write-Host "GPU Count: $($json.gpu_count)"
+        
+        if ($json.gpus -and $json.gpus.Count -gt 0) {
+            foreach ($gpu in $json.gpus) {
+                $gpuTemp = $gpu.temperature_celsius
+                $gpuVendor = $gpu.vendor
+                $gpuModel = $gpu.model
+                $gpuType = $gpu.type
+                
+                Write-Host ""
+                Write-Host "GPU [$($gpu.index)] - $gpuVendor $gpuModel ($gpuType):"
+                
+                if ($gpuTemp -gt 0) {
+                    Write-Host "  Temperature: $($gpuTemp)°C (source: $($gpu.temperature_source))"
+                } else {
+                    Write-Host "  Temperature: N/A"
+                }
+                
+                if ($gpu.vram_total_mb -gt 0) {
+                    $vramGB = [math]::Round($gpu.vram_total_mb / 1024, 2)
+                    $vramUsedGB = [math]::Round($gpu.vram_used_mb / 1024, 2)
+                    Write-Host "  VRAM: $vramUsedGB / $vramGB GB"
+                }
+            }
+        } else {
+            Write-Host "GPU Temperature: N/A"
+        }
     }
     
     Write-Host "Validation: PASSED"

@@ -244,7 +244,7 @@ def _extract_network_metrics(network_data: List[Dict[str, Any]]) -> Dict[str, An
 
 
 def _extract_temperature_metrics(temp_data: Dict[str, Any]) -> Dict[str, Any]:
-    """Extract temperature metrics with GPU details."""
+    """Extract temperature metrics with GPU details from new structured format."""
     if temp_data.get('status') in ['error', 'unavailable', 'restricted']:
         return {
             'status': temp_data.get('status', 'unavailable'),
@@ -257,28 +257,71 @@ def _extract_temperature_metrics(temp_data: Dict[str, Any]) -> Dict[str, Any]:
             'vram_total_mb': 0,
             'vram_used_mb': 0,
             'vram_free_mb': 0,
-            'vram_usage_percent': 0
+            'vram_usage_percent': 0,
+            'gpu_count': 0,
+            'gpus': []
         }
     
-    vram_total = temp_data.get('vram_total_mb', 0)
-    vram_used = temp_data.get('vram_used_mb', 0)
+    # Extract CPU temperature from cpu object
+    cpu_obj = temp_data.get('cpu', {})
+    cpu_temp = cpu_obj.get('temperature_celsius', 0) if isinstance(cpu_obj, dict) else temp_data.get('cpu_celsius', 0)
+    cpu_vendor = cpu_obj.get('vendor', 'N/A') if isinstance(cpu_obj, dict) else temp_data.get('cpu_vendor', 'N/A')
+    
+    # Extract GPU data from gpus array (new format) or fallback to old flat format
+    gpus = temp_data.get('gpus', [])
+    gpu_count = temp_data.get('gpu_count', len(gpus))
+    
+    # For backward compatibility with old flat format
+    if not gpus and temp_data.get('gpu_celsius'):
+        gpus = [{
+            'vendor': temp_data.get('gpu_vendor', 'N/A'),
+            'model': temp_data.get('gpu_model', 'N/A'),
+            'type': temp_data.get('gpu_type', 'N/A'),
+            'temperature_celsius': temp_data.get('gpu_celsius'),
+            'vram_total_mb': temp_data.get('vram_total_mb', 0),
+            'vram_used_mb': temp_data.get('vram_used_mb', 0),
+            'vram_free_mb': temp_data.get('vram_free_mb', 0),
+            'index': 0
+        }]
+        gpu_count = 1
+    
+    # Extract primary GPU info for backward compatibility fields
+    primary_gpu = None
+    if gpus:
+        # Prefer dedicated GPU
+        for gpu in gpus:
+            if gpu.get('type') == 'Dedicated':
+                primary_gpu = gpu
+                break
+        if not primary_gpu:
+            primary_gpu = gpus[0]
+    
+    # Calculate VRAM usage for primary GPU
+    vram_total = primary_gpu.get('vram_total_mb', 0) if primary_gpu else 0
+    vram_used = primary_gpu.get('vram_used_mb', 0) if primary_gpu else 0
+    vram_free = primary_gpu.get('vram_free_mb', 0) if primary_gpu else 0
     vram_usage_percent = 0
     
     if vram_total > 0 and vram_used > 0:
         vram_usage_percent = round((vram_used / vram_total) * 100, 1)
     
     return {
-        'status': temp_data.get('status', 'OK'),
-        'cpu_temp': temp_data.get('cpu_celsius') or temp_data.get('cpu_temp'),
-        'gpu_temp': temp_data.get('gpu_celsius') or temp_data.get('gpu_temp'),
-        'cpu_vendor': temp_data.get('cpu_vendor', 'N/A'),
-        'gpu_vendor': temp_data.get('gpu_vendor', 'N/A'),
-        'gpu_model': temp_data.get('gpu_model', 'N/A'),
-        'gpu_type': temp_data.get('gpu_type', 'N/A'),
+        'status': temp_data.get('status', 'ok'),
+        # CPU data
+        'cpu_temp': cpu_temp if cpu_temp > 0 else None,
+        'cpu_vendor': cpu_vendor,
+        # Primary GPU data (for backward compatibility)
+        'gpu_temp': primary_gpu.get('temperature_celsius') if primary_gpu else None,
+        'gpu_vendor': primary_gpu.get('vendor', 'N/A') if primary_gpu else 'N/A',
+        'gpu_model': primary_gpu.get('model', 'N/A') if primary_gpu else 'N/A',
+        'gpu_type': primary_gpu.get('type', 'N/A') if primary_gpu else 'N/A',
         'vram_total_mb': vram_total,
         'vram_used_mb': vram_used,
-        'vram_free_mb': temp_data.get('vram_free_mb', 0),
-        'vram_usage_percent': vram_usage_percent
+        'vram_free_mb': vram_free,
+        'vram_usage_percent': vram_usage_percent,
+        # New structured format
+        'gpu_count': gpu_count,
+        'gpus': gpus
     }
 
 

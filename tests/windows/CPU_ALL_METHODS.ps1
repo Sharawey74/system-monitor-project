@@ -96,13 +96,13 @@ function Save-MethodResult {
         [string]$MethodName,
         [string]$Status,
         [object]$Data = $null,
-        [string]$Error = $null
+        [string]$ErrorMessage = $null
     )
     
     $global:Config.Results[$MethodName] = @{
         Status = $Status
         Data = $Data
-        Error = $Error
+        ErrorMessage = $ErrorMessage
         Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     }
 }
@@ -140,7 +140,7 @@ function Test-WMI-ThermalZone {
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "WMI_ThermalZone" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "WMI_ThermalZone" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -180,7 +180,7 @@ function Test-WMI-TemperatureProbe {
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "Win32_TemperatureProbe" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "Win32_TemperatureProbe" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -228,7 +228,7 @@ function Test-PerformanceCounters {
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "PerformanceCounters" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "PerformanceCounters" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -260,7 +260,7 @@ function Test-CIM-ThermalZone {
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "CIM_ThermalZone" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "CIM_ThermalZone" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -337,7 +337,7 @@ function Test-LibreHardwareMonitor {
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "LibreHardwareMonitor" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "LibreHardwareMonitor" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -392,7 +392,7 @@ function Test-OpenHardwareMonitor {
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "OpenHardwareMonitor" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "OpenHardwareMonitor" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -517,7 +517,7 @@ public class IntelMSR
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "DirectMSR" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "DirectMSR" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -542,7 +542,7 @@ function Test-SMBus {
         
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "SMBus" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "SMBus" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -576,7 +576,7 @@ function Test-IntelXTU {
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "IntelXTU" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "IntelXTU" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -605,7 +605,7 @@ function Test-AMDRyzenMaster {
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "AMDRyzenMaster" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "AMDRyzenMaster" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
@@ -653,7 +653,7 @@ function Test-VendorTools {
         }
     } catch {
         Write-Result "FAILED: $($_.Exception.Message)" "FAIL"
-        Save-MethodResult -MethodName "VendorTools" -Status "Error" -Error $_.Exception.Message
+        Save-MethodResult -MethodName "VendorTools" -Status "Error" -ErrorMessage $_.Exception.Message
     }
 }
 
