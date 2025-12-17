@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitor Report | 2025-12-17 16:16:03</title>
+    <style>
+        :root {
+            /* Professional Light Theme Palette */
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            
+            --primary: #3b82f6; /* Blue for Guest/General */
+            --accent: #22c55e;  /* Green for Host */
+            
+            --success-bg: #dcfce7;
+            --success-text: #166534;
+            --warning-bg: #fef3c7;
+            --warning-text: #92400e;
+            --danger-bg: #fee2e2;
+            --danger-text: #991b1b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.025em;
+        }
+
+        .header-mdata {
+            text-align: right;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* DUAL COLUMN LAYOUT */
+        .dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            divide-x: 1px solid var(--border-color); /* Divider between columns */
+        }
+        
+        .column {
+            padding: 30px;
+        }
+        
+        /* Handling case where only one source is available */
+        .dual-grid.single-col {
+            grid-template-columns: 1fr;
+        }
+
+        .col-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .col-icon {
+            font-size: 1.5rem;
+            margin-right: 12px;
+        }
+
+        .col-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .col-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        /* METRIC CARDS */
+        .metric-group {
+            margin-bottom: 25px;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .mg-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .mg-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .mg-val {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        
+        .mg-detail {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* PROGRESS BARS */
+        .prog-track {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .prog-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        /* LISTS (Disks, etc) */
+        .data-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+        
+        .data-item:last-child {
+            border-bottom: none;
+        }
+
+        /* UTILITIES */
+        .text-success { color: var(--success-text); }
+        .text-warning { color: var(--warning-text); }
+        .text-danger  { color: var(--danger-text); }
+        .bg-success { background-color: var(--accent); }
+        .bg-warning { background-color: #f59e0b; }
+        .bg-danger  { background-color: #ef4444; }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-success { background: var(--success-bg); color: var(--success-text); }
+        .badge-warning { background: var(--warning-bg); color: var(--warning-text); }
+        .badge-danger  { background: var(--danger-bg); color: var(--danger-text); }
+
+        footer {
+            background: #f1f5f9;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* PRINT OPTIMIZATION */
+        @media print {
+            body { padding: 0; background: white; }
+            .container { box-shadow: none; border: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-title">
+                <h1>System Observability Report</h1>
+                <div style="margin-top:5px; font-weight:500; color:#64748b;">Detailed Performance Metrics</div>
+            </div>
+            <div class="header-mdata">
+                <div><strong>Generated:</strong> 2025-12-17 16:16:03</div>
+                <div>System Monitor v5.0</div>
+            </div>
+        </header>
+
+        
+        
+
+        <div class="dual-grid ">
+            
+            <!-- COLUMN 1: WINDOWS HOST (NATIVE) -->
+            
+            <div class="column">
+                <div class="col-header" style="border-color: var(--accent);">
+                    <div class="col-title">Windows Host</div>
+                    <div class="col-subtitle">Native Agent</div>
+                </div>
+
+                <!-- Host Info -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">System</span></div>
+                    <div class="data-list">
+                        <div class="data-item">
+                            <span>Hostname</span>
+                            <strong>DESKTOP-T6GSL92</strong>
+                        </div>
+                        <div class="data-item">
+                            <span>OS</span>
+                            <span>windows</span>
+                        </div>
+                        <div class="data-item">
+                            <span>Uptime</span>
+                            <span>54.6h</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CPU -->
+                <div class="metric-group">
+                    <div class="mg-header">
+                        <span class="mg-title">CPU Processor</span>
+                        <div class="badge badge-success">Active</div>
+                    </div>
+                    
+                    <div class="mg-val">32.69230769230769%</div>
+                    <div class="prog-track">
+                        <div class="prog-fill success" style="width: 32.69230769230769%"></div>
+                    </div>
+                    <div class="mg-detail">11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz</div>
+                    <div class="mg-detail">8 Cores | Temp: 0°C</div>
+                </div>
+
+                <!-- Memory -->
+                <div class="metric-group">
+                    
+                    <div class="mg-header"><span class="mg-title">Memory</span></div>
+                    <div class="mg-val">84%</div>
+                    <div class="prog-track">
+                        <div class="prog-fill danger" style="width: 84%"></div>
+                    </div>
+                    <div class="mg-detail">13.3 GB used of 15.7 GB</div>
+                </div>
+
+                <!-- Disk -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">Storage</span></div>
+                    <div class="data-list">
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>C:</strong>
+                                <span style="font-size:0.8em; color:#94a3b8">(NTFS)</span>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">78.8%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.4 used</div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>D:</strong>
+                                <span style="font-size:0.8em; color:#94a3b8">(NTFS)</span>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">2.6%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.0 used</div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>E:</strong>
+                                <span style="font-size:0.8em; color:#94a3b8">(NTFS)</span>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">0.9%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.0 used</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- GPU -->
+                
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">GPU</span></div>
+                    
+                    <div class="data-item" style="display:block;">
+                        <div style="font-weight:600; margin-bottom:4px;">NVIDIA GeForce MX330</div>
+                        <div style="font-size:0.85rem; color:#64748b;">
+                            Temp: 57°C | Util: 1%
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+
+
+            <!-- COLUMN 2: WSL GUEST (LEGACY) -->
+            
+            <div class="column" style="background-color: #fafafa;"> <!-- Slight contrast for Guest -->
+                <div class="col-header" style="border-color: #f59e0b;">
+                    <div class="col-title">WSL2 Guest</div>
+                    <div class="col-subtitle">Virtual Environment</div>
+                </div>
+
+                <!-- Host Info -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">System</span></div>
+                    <div class="data-list">
+                        <div class="data-item">
+                            <span>Hostname</span>
+                            <strong>DESKTOP-T6GSL92</strong>
+                        </div>
+                        <div class="data-item">
+                            <span>OS</span>
+                            <span>Ubuntu 24.04.3 LTS</span>
+                        </div>
+                        <div class="data-item">
+                            <span>Kernel</span>
+                            <span title="6.6.87.2-microsoft-standard-WSL2" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:150px;">6.6.87.2-microsoft-standard-WSL2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CPU -->
+                <div class="metric-group">
+                    <div class="mg-header">
+                        <span class="mg-title">vCPU Processor</span>
+                    </div>
+                    
+                    <div class="mg-val">0.37%</div>
+                    <div class="prog-track">
+                        <div class="prog-fill success" style="width: 0.37%"></div>
+                    </div>
+                    <div class="mg-detail">11th Gen Intel(R) Core(TM) i7-1165G7...</div>
+                    <div class="mg-detail">Load: 0.61 | 0.31 | 0.16</div>
+                </div>
+
+                <!-- Memory -->
+                <div class="metric-group">
+                    
+                    <div class="mg-header"><span class="mg-title">Memory</span></div>
+                    <div class="mg-val">12.9%</div>
+                    <div class="prog-track">
+                        <div class="prog-fill success" style="width: 12.9%"></div>
+                    </div>
+                    <div class="mg-detail">1.0 GB used of 7.6 GB</div>
+                </div>
+
+                <!-- Disk -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">Storage</span></div>
+                    <div class="data-list">
+                        
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/wsl</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">0.0%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.0GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">0.4%</div>
+                                <div style="font-size:0.75em; color:#64748b">4.2GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/wslg</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">0.0%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.0GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/wslg/versions.txt</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">0.0%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.0GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/wslg/doc</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">0.0%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.0GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/c</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">78.8%</div>
+                                <div style="font-size:0.75em; color:#64748b">374.4GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/d</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">2.6%</div>
+                                <div style="font-size:0.75em; color:#64748b">12.3GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/e</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">0.9%</div>
+                                <div style="font-size:0.75em; color:#64748b">4.2GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/wsl/docker-desktop/shared-sockets/host-services</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">0.0%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.0GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/wsl/docker-desktop/docker-desktop-user-distro</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">50.2%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.1GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="data-item">
+                            <div>
+                                <strong>/mnt/wsl/docker-desktop/cli-tools</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">100.0%</div>
+                                <div style="font-size:0.75em; color:#64748b">0.7GB used</div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+                <!-- Network Summary -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">Active Interfaces</span></div>
+                    <div class="data-list">
+                        
+                        
+                        <div class="data-item">
+                            <strong>lo</strong>
+                            <span style="font-size:0.8rem">RX: 7.10 MB | TX: 7.10 MB</span>
+                        </div>
+                        
+                        
+                        
+                        <div class="data-item">
+                            <strong>eth0</strong>
+                            <span style="font-size:0.8rem">RX: 17.68 MB | TX: 491.87 KB</span>
+                        </div>
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+
+        
+        <div style="padding: 30px; border-top: 1px solid var(--border-color);">
+            <h3 style="margin-top:0; color:var(--text-main);">System Alerts</h3>
+            <div style="display: grid; gap: 10px;">
+                
+                <div style="padding: 10px 15px; border-radius: 6px; background: var(--warning-bg); color: var(--warning-text);">
+                    <strong>:</strong>  <small>()</small>
+                </div>
+                
+                <div style="padding: 10px 15px; border-radius: 6px; background: var(--warning-bg); color: var(--warning-text);">
+                    <strong>:</strong>  <small>()</small>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <footer>
+            Generated on 2025-12-17 16:16:03 • Host: DESKTOP-T6GSL92
+        </footer>
+    </div>
+</body>
+</html>

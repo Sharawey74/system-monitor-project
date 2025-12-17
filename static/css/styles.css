@@ -60,82 +60,115 @@ body {
 }
 
 /* --- Header --- */
-.top-header {
+/* ===================================
+   HEADER & NAVIGATION
+   =================================== */
+.dashboard-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 20px;
+    row-gap: 5px;
+    align-items: center;
+    padding: 24px 40px;
+    background: rgba(15, 23, 42, 0.85);
+    /* Darker, more premium */
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* 
+   Grid Areas Concept:
+   [Title] [Spacer] [Notifications]
+   [Chips] [Spacer] [Actions] -- or stacked 
+   
+   Actually, let's use Flex but column for left side is safer for dynamic content
+*/
+
+.dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    /* The chips will be inside header-left, stacked below title */
 }
 
-.page-title {
-    font-size: 2rem;
-    font-weight: 700;
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* Space between title and chips */
+}
+
+.header-right {
     display: flex;
     align-items: center;
-    gap: 15px;
+    /* Space for buttons */
+    gap: 16px;
+    padding-top: 10px;
+    /* Align slightly with the visual weight */
 }
 
-.brand-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--grad-1);
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
-    font-size: 1.2rem;
-    color: #fff;
+.app-title {
+    margin: 0;
+    font-size: 2.2rem;
+    /* Larger, bolder */
+    font-weight: 800;
+    color: #f8fafc;
+    letter-spacing: -1px;
+    line-height: 1;
 }
 
-.action-area {
-    display: flex;
-    gap: 15px;
-    align-items: center;
+.app-title i {
+    display: none;
 }
 
-/* Primary Button (Gradient) */
-.btn-primary {
-    background: var(--grad-1);
+/* Hide icon if requesting minimal text look */
+
+/* Buttons Premium */
+.btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    /* Smooth rounded */
     border: none;
-    padding: 12px 25px;
-    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary-glow {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     color: white;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
-    transition: transform 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.btn-primary:active {
-    transform: scale(0.95);
+.btn-primary-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-/* Secondary Button (Outline/Glass) */
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-color);
-    padding: 12px 25px;
-    border-radius: 12px;
-    color: var(--text-main);
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.btn-glass {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    backdrop-filter: blur(10px);
 }
 
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
 }
 
-.btn-secondary:active {
-    transform: scale(0.95);
+.btn i {
+    font-size: 1.1rem;
 }
 
 
@@ -446,5 +479,509 @@ body {
 @media (max-width: 1024px) {
     .grid-2-1 {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ===================================
+   CHARTS SECTION (Task Manager Style)
+   =================================== */
+.charts-section {
+    margin-top: 30px;
+    margin-bottom: 80px;
+    /* Space for footer alerts */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease;
+}
+
+.chart-card:hover {
+    transform: translateY(-2px);
+}
+
+.chart-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.chart-header i {
+    font-size: 1.3rem;
+    color: #6366f1;
+}
+
+.chart-canvas {
+    height: 200px !important;
+    width: 100% !important;
+}
+
+/* Responsive charts */
+@media (max-width: 1200px) {
+    .charts-section {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-canvas {
+        height: 180px !important;
+    }
+}
+
+/* ===================================
+   FOOTER ALERTS
+   =================================== */
+/* ===================================
+   STATUS CHIPS
+   =================================== */
+/* ===================================
+   STATUS CHIPS
+   =================================== */
+.status-chips {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 99px;
+    /* Full pill shape */
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    /* Dot color handled by parent class */
+}
+
+/* Online: Green Border + Dark Green BG */
+.chip.online {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.5);
+    color: #f0fdf4;
+}
+
+.chip.online .chip-dot {
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+}
+
+/* Offline: Red Border + Dark Red BG */
+.chip.offline {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.5);
+    color: #fef2f2;
+}
+
+.chip.offline .chip-dot {
+    background: #f87171;
+}
+
+/* Time: Neutral */
+.chip-neutral {
+    color: #94a3b8;
+    background: transparent;
+    padding: 0;
+    /* Just text for timestamp */
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.chip-neutral i {
+    font-size: 1rem;
+    margin-right: 4px;
+}
+
+/* ===================================
+   NOTIFICATION DRAWER
+   =================================== */
+.notification-wrapper {
+    position: relative;
+    margin-left: 10px;
+}
+
+.btn-icon {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.btn-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ef4444;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-body);
+}
+
+.notification-drawer {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 55px;
+    right: 0;
+    width: 350px;
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    overflow: hidden;
+    animation: slideDown 0.2s ease-out;
+}
+
+.notification-drawer.open {
+    display: block;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.drawer-header {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.drawer-header h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.btn-text:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.drawer-content {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.drawer-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.drawer-content::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.empty-state {
+    padding: 30px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Notification Item Card */
+.notification-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-left: 3px solid transparent;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    animation: fadeIn 0.3s ease;
+    transition: background 0.2s;
+}
+
+.notification-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.notification-item:last-child {
+    margin-bottom: 0;
+}
+
+.notif-icon {
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.notif-body {
+    flex: 1;
+}
+
+.notif-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: #e2e8f0;
+}
+
+.notif-msg {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+.notif-time {
+    font-size: 0.7rem;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+/* Severity Styles */
+.notif-critical {
+    border-left-color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.notif-critical .notif-icon {
+    color: #ef4444;
+}
+
+.notif-warning {
+    border-left-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.notif-warning .notif-icon {
+    color: #f59e0b;
+}
+
+.notif-info {
+    border-left-color: #3b82f6;
+}
+
+.notif-info .notif-icon {
+    color: #3b82f6;
+}
+
+/* Responsive Header Fix */
+@media (max-width: 900px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .status-chips {
+        margin-left: 0;
+        border-left: none;
+        padding-left: 0;
+        margin-top: 5px;
+        flex-wrap: wrap;
+    }
+
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .notification-drawer {
+        width: 300px;
+        right: -10px;
+    }
+}
+
+/* DEPRECATED FOOTER ALERTS (Hidden) */
+.alert-footer-deprecated {
+    display: none !important;
+
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .alert-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    .alert-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        animation: fadeIn 0.3s ease-out;
+        position: relative;
+        padding-right: 35px;
+        /* Space for close button */
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Alert severity colors */
+    .alert-info {
+        background: rgba(99, 102, 241, 0.15);
+        border-left: 3px solid #6366f1;
+        color: #a5b4fc;
+    }
+
+    .alert-warning {
+        background: rgba(245, 158, 11, 0.15);
+        border-left: 3px solid #f59e0b;
+        color: #fcd34d;
+    }
+
+    .alert-critical {
+        background: rgba(239, 68, 68, 0.15);
+        border-left: 3px solid #ef4444;
+        color: #fca5a5;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.8;
+        }
+    }
+
+    .alert-icon {
+        font-size: 1.2rem;
+    }
+
+    .alert-message {
+        flex: 1;
+    }
+
+    .alert-close {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        padding: 4px;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+
+    .alert-close:hover {
+        opacity: 1;
+    }
+
+    /* Alert value display */
+    .alert-value {
+        font-weight: 700;
+        margin: 0 4px;
+    }
+
+    /* Responsive alerts */
+    @media (max-width: 768px) {
+        .alert-footer {
+            padding: 10px 15px;
+        }
+
+        .alert-item {
+            font-size: 0.85rem;
+            padding: 8px 12px;
+            padding-right: 30px;
+        }
+
+        .alert-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
     }
 }

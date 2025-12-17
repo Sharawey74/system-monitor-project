@@ -1,14 +1,14 @@
 {
-  "timestamp": "2025-12-16T22:06:15Z",
+  "timestamp": "2025-12-17T17:52:18Z",
   "platform": "windows",
   "system": {
     "os": "windows",
     "hostname": "DESKTOP-T6GSL92",
-    "uptime_seconds": 131284,
+    "uptime_seconds": 3159,
     "kernel": "10.0.26200.7462 Build 26200.7462"
   },
   "cpu": {
-    "usage_percent": 46.15384615384615,
+    "usage_percent": 58.269230769230774,
     "logical_processors": 8,
     "load_1": 0,
     "load_5": 0,
@@ -19,10 +19,10 @@
   },
   "memory": {
     "total_mb": 16106,
-    "used_mb": 14256,
-    "free_mb": 1850,
-    "available_mb": 1850,
-    "usage_percent": 88,
+    "used_mb": 15151,
+    "free_mb": 955,
+    "available_mb": 955,
+    "usage_percent": 94,
     "status": "ok"
   },
   "disk": [
@@ -30,8 +30,8 @@
       "device": "C:",
       "filesystem": "NTFS",
       "total_gb": 475.2829818725586,
-      "used_gb": 375.8005485534668,
-      "used_percent": 79.0687996176209
+      "used_gb": 372.7841033935547,
+      "used_percent": 78.43413663262874
     },
     {
       "device": "D:",
@@ -55,11 +55,6 @@
       "tx_bytes": 0
     },
     {
-      "iface": "vEthernet (Default Switch)",
-      "rx_bytes": 0,
-      "tx_bytes": 1750795
-    },
-    {
       "iface": "Local Area Connection* 1",
       "rx_bytes": 0,
       "tx_bytes": 0
@@ -71,18 +66,18 @@
     },
     {
       "iface": "VMware Network Adapter VMnet1",
-      "rx_bytes": 58,
-      "tx_bytes": 4408
+      "rx_bytes": 11,
+      "tx_bytes": 1183
     },
     {
       "iface": "VMware Network Adapter VMnet8",
-      "rx_bytes": 58,
-      "tx_bytes": 6797
+      "rx_bytes": 11,
+      "tx_bytes": 1553
     },
     {
       "iface": "Wi-Fi",
-      "rx_bytes": 893701148,
-      "tx_bytes": 550387813
+      "rx_bytes": 420727932,
+      "tx_bytes": 71534981
     },
     {
       "iface": "Loopback Pseudo-Interface 1",
@@ -90,9 +85,14 @@
       "tx_bytes": 0
     },
     {
+      "iface": "vEthernet (Default Switch)",
+      "rx_bytes": 0,
+      "tx_bytes": 165629
+    },
+    {
       "iface": "vEthernet (WSL (Hyper-V firewall))",
-      "rx_bytes": 505937,
-      "tx_bytes": 6193725
+      "rx_bytes": 41484,
+      "tx_bytes": 202013
     }
   ],
   "temperature": {
@@ -109,10 +109,10 @@
       {
         "vendor": "NVIDIA",
         "model": "NVIDIA GeForce MX330",
-        "utilization_percent": 0,
+        "utilization_percent": 1,
         "memory_used_mb": 0,
         "memory_total_mb": 2048,
-        "temperature_celsius": 61,
+        "temperature_celsius": 63,
         "status": "ok"
       }
     ]

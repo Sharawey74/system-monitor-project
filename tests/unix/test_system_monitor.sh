@@ -28,8 +28,9 @@ if ! echo "$output" | python3 -m json.tool &>/dev/null && ! echo "$output" | jq 
 fi
 
 # Check for required fields
-if ! echo "$output" | grep -q '"system"'; then
-    echo "[FAIL] Missing 'system' field"
+# Output is flat JSON object
+if ! echo "$output" | grep -q '"os"'; then
+    echo "[FAIL] Missing 'os' field"
     exit 1
 fi
 

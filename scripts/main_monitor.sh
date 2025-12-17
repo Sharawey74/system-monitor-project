@@ -81,8 +81,8 @@ done
 # Merge all JSON files
 "${UTILS_DIR}/logger.sh" "INFO" "Merging JSON outputs"
 
-PLATFORM_OUTPUT="${PROJECT_ROOT}/data/metrics/unix_current.json"
-LATEST_OUTPUT="${PROJECT_ROOT}/data/metrics/current.json"
+PLATFORM_OUTPUT="${PLATFORM_OUTPUT:-${PROJECT_ROOT}/data/metrics/unix_current.json}"
+LATEST_OUTPUT="${LATEST_OUTPUT:-${PROJECT_ROOT}/data/metrics/current.json}"
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || date +"%Y-%m-%dT%H:%M:%SZ")
 
 # Build merged JSON with metadata and proper structure

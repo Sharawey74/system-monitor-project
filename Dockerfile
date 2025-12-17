@@ -59,6 +59,7 @@ COPY templates/ ./templates/
 COPY core/ ./core/
 COPY display/ ./display/
 COPY scripts/ ./scripts/
+COPY dashboard_tui.py .
 
 # Create data directories
 RUN mkdir -p \

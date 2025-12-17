@@ -196,21 +196,42 @@ def get_metrics_source():
 def generate_report():
     """Generate a system report on demand."""
     try:
-        # Fetch current metrics
-        metrics_data = {}
+        # Fetch Dual Metrics (similar to get_dual_metrics)
+        legacy_data = None
+        native_data = None
+
+        # 1. Get Legacy
         if HOST_LATEST_JSON.exists():
-            with open(HOST_LATEST_JSON, 'r', encoding='utf-8') as f:
-                metrics_data = json.load(f)
+            try:
+                with open(HOST_LATEST_JSON, 'r', encoding='utf-8') as f:
+                    legacy_data = json.load(f)
+            except: pass
         
-        # Fallback: Try Latest Log in json/ directory if host file missing
-        if not metrics_data and JSON_DIR.exists():
+        # Fallback for Legacy if missing
+        if not legacy_data and JSON_DIR.exists():
             try:
                 json_files = sorted(JSON_DIR.glob('*.json'), key=lambda p: p.stat().st_mtime, reverse=True)
                 if json_files:
                     with open(json_files[0], 'r', encoding='utf-8') as f:
-                        metrics_data = json.load(f)
-            except Exception as e:
-                logger.error(f"Fallback reading failed in report gen: {e}")
+                        legacy_data = json.load(f)
+            except: pass
+
+        # 2. Get Native
+        if GO_LATEST_JSON.exists():
+            try:
+                with open(GO_LATEST_JSON, 'r', encoding='utf-8') as f:
+                    native_data = json.load(f)
+            except: pass
+        
+        if not native_data:
+            try:
+                response = requests.get(f"{NATIVE_AGENT_URL}/metrics", timeout=1)
+                if response.status_code == 200:
+                    native_data = response.json()
+            except: pass
+
+        if not legacy_data and not native_data:
+             return jsonify({'success': False, 'error': 'No metrics available to generate report'})
         
         # Determine alerts (mock or load real)
         alerts_data = []
@@ -218,10 +239,7 @@ def generate_report():
             with open(ALERTS_FILE, 'r', encoding='utf-8') as f:
                 alerts_data = json.load(f)
 
-        if not metrics_data:
-             return jsonify({'success': False, 'error': 'No metrics available to generate report'})
-
-        html_path, md_path = report_gen.generate_report(metrics_data, alerts_data)
+        html_path, md_path = report_gen.generate_report(legacy_data, native_data, alerts_data)
         
         return jsonify({
             'success': True, 
@@ -238,6 +256,36 @@ def generate_report():
 def download_report_html(filename):
     """Download HTML report."""
     return send_file(REPORTS_DIR / 'html' / filename, as_attachment=True)
+
+
+@app.route('/api/refresh', methods=['POST'])
+def trigger_refresh():
+    """
+    Trigger immediate metric collection on Host and Native Agent.
+    """
+    results = {}
+    
+    # 1. Refresh Legacy Host (if URL available)
+    host_api_url = os.getenv('HOST_API_URL', 'http://host.docker.internal:8888')
+    try:
+        resp = requests.post(f"{host_api_url}/refresh", timeout=12)
+        results['legacy'] = resp.json() if resp.status_code == 200 else {'error': resp.text}
+    except Exception as e:
+        results['legacy'] = {'error': str(e)}
+
+    # 2. Refresh Native Agent (if supported)
+    if os.getenv('USE_NATIVE_AGENT', 'false').lower() == 'true' or True: # Try anyway
+        native_url = os.getenv('NATIVE_AGENT_URL', 'http://host.docker.internal:8889')
+        try:
+            resp = requests.post(f"{native_url}/refresh", timeout=5)
+            results['native'] = resp.json() if resp.status_code == 200 else {'error': resp.text}
+        except Exception as e:
+            results['native'] = {'error': str(e)}
+    
+    return jsonify({
+        'success': True,
+        'results': results
+    })
 
 
 @app.route('/api/health')

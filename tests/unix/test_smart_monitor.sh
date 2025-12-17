@@ -28,8 +28,13 @@ if ! echo "$output" | python3 -m json.tool &>/dev/null && ! echo "$output" | jq 
 fi
 
 # Check for required fields
-if ! echo "$output" | grep -q '"smart"'; then
-    echo "[FAIL] Missing 'smart' field"
+# Output is an array OR {"status": "unavailable/restricted"}
+if echo "$output" | grep -q '"status"'; then
+    echo "[INFO] SMART status found"
+elif echo "$output" | grep -q '"device"'; then
+    echo "[INFO] SMART device data found"
+else
+    echo "[FAIL] Missing 'device' or 'status' field"
     exit 1
 fi
 

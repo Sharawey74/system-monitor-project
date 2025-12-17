@@ -28,8 +28,14 @@ if ! echo "$output" | python3 -m json.tool &>/dev/null && ! echo "$output" | jq 
 fi
 
 # Check for required fields
-if ! echo "$output" | grep -q '"network"'; then
-    echo "[FAIL] Missing 'network' field"
+# Output is an array of network objects
+if ! echo "$output" | grep -q '"iface"'; then
+    echo "[FAIL] Missing 'iface' field"
+    exit 1
+fi
+
+if ! echo "$output" | grep -q '"rx_bytes"'; then
+    echo "[FAIL] Missing 'rx_bytes' field"
     exit 1
 fi
 

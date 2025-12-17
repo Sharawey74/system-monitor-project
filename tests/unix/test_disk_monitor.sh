@@ -28,8 +28,14 @@ if ! echo "$output" | python3 -m json.tool &>/dev/null && ! echo "$output" | jq 
 fi
 
 # Check for required fields
-if ! echo "$output" | grep -q '"disk"'; then
-    echo "[FAIL] Missing 'disk' field"
+# Output is an array of disk objects
+if ! echo "$output" | grep -q '"device"'; then
+    echo "[FAIL] Missing 'device' field"
+    exit 1
+fi
+
+if ! echo "$output" | grep -q '"used_percent"'; then
+    echo "[FAIL] Missing 'used_percent' field"
     exit 1
 fi
 

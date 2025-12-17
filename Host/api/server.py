@@ -7,6 +7,7 @@ Port: 9999
 
 import json
 import time
+import subprocess
 from pathlib import Path
 from typing import Dict, Any, Optional
 
@@ -18,6 +19,7 @@ from fastapi.responses import JSONResponse
 API_PORT = 8888
 API_HOST = "0.0.0.0"
 METRICS_FILE = Path(__file__).parent.parent / "output" / "latest.json"
+MONITOR_SCRIPT = Path(__file__).parent.parent / "scripts" / "main_monitor.sh"
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -89,6 +91,52 @@ async def get_metrics() -> Dict[str, Any]:
         raise HTTPException(
             status_code=500,
             detail=f"Error reading metrics: {str(e)}"
+        )
+
+
+@app.post("/refresh")
+async def refresh_metrics() -> Dict[str, Any]:
+    """
+    Trigger manual refresh of metrics by running main_monitor.sh
+    """
+    try:
+        if not MONITOR_SCRIPT.exists():
+            raise HTTPException(
+                status_code=500,
+                detail=f"Monitor script not found at {MONITOR_SCRIPT}"
+            )
+
+        # Run the script
+        start_time = time.time()
+        result = subprocess.run(
+            ["bash", str(MONITOR_SCRIPT)],
+            capture_output=True,
+            text=True,
+            timeout=10  # 10s timeout
+        )
+        duration = time.time() - start_time
+
+        if result.returncode != 0:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Monitor script failed: {result.stderr}"
+            )
+
+        return {
+            "status": "success",
+            "message": "Metrics refreshed",
+            "duration": f"{duration:.2f}s"
+        }
+
+    except subprocess.TimeoutExpired:
+        raise HTTPException(
+            status_code=504,
+            detail="Monitor script timed out"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Refresh failed: {str(e)}"
         )
 
 

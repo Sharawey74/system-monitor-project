@@ -550,7 +550,22 @@ func collectGPUInfo() GPUInfo {
 		Devices: []GPUDevice{},
 	}
 
-	// Try to execute nvidia-smi
+	// 1. Try NVIDIA (nvidia-smi) - Best Data
+	if nvidiaInfo := collectNvidiaInfo(); nvidiaInfo.Status == "ok" {
+		return nvidiaInfo
+	}
+
+	// 2. Fallback: Windows Generic (WMI/CIM) - Essential Data (Name)
+	if runtime.GOOS == "windows" {
+		return collectWindowsGPUs()
+	}
+
+	return gpuInfo
+}
+
+func collectNvidiaInfo() GPUInfo {
+	gpuInfo := GPUInfo{Status: "unavailable"}
+
 	cmd := exec.Command("nvidia-smi", "--query-gpu=name,utilization.gpu,memory.used,memory.total,temperature.gpu", "--format=csv,noheader,nounits")
 	output, err := cmd.Output()
 	if err != nil {
@@ -587,6 +602,80 @@ func collectGPUInfo() GPUInfo {
 	return gpuInfo
 }
 
+func collectWindowsGPUs() GPUInfo {
+	gpuInfo := GPUInfo{Status: "unavailable"}
+
+	// Use PowerShell to get clean JSON output for Video Controllers
+	cmd := exec.Command("powershell", "-Command", "Get-CimInstance Win32_VideoController | Select-Object Name, AdapterRAM | ConvertTo-Json -Compress")
+	output, err := cmd.Output()
+	if err != nil {
+		return gpuInfo
+	}
+
+	// Define struct for parsing PowerShell JSON
+	type WinVideoController struct {
+		Name       string      `json:"Name"`
+		AdapterRAM interface{} `json:"AdapterRAM"` // Can be float64 or int
+	}
+
+	var controllers []WinVideoController
+	
+	// Handle single object vs array return from PowerShell
+	jsonStr := strings.TrimSpace(string(output))
+	if strings.HasPrefix(jsonStr, "{") {
+		var single WinVideoController
+		if err := json.Unmarshal([]byte(jsonStr), &single); err == nil {
+			controllers = append(controllers, single)
+		}
+	} else if strings.HasPrefix(jsonStr, "[") {
+		json.Unmarshal([]byte(jsonStr), &controllers)
+	}
+
+	for _, card := range controllers {
+		// Filter out basic display adapters if needed, but usually keep all
+		vendor := "Unknown"
+		nameLower := strings.ToLower(card.Name)
+		if strings.Contains(nameLower, "nvidia") {
+			vendor = "NVIDIA"
+		} else if strings.Contains(nameLower, "amd") || strings.Contains(nameLower, "radeon") {
+			vendor = "AMD"
+		} else if strings.Contains(nameLower, "intel") {
+			vendor = "Intel"
+		}
+
+		// Calculate RAM in MB
+		ramMB := 0
+		if card.AdapterRAM != nil {
+			if val, ok := card.AdapterRAM.(float64); ok {
+				ramMB = int(val / 1024 / 1024)
+			}
+		}
+
+		// Attempt to get Temperature via Generic Tools
+		// Note: Accurate GPU temp for AMD/Intel often requires complex API calls (ADL/IGCL)
+		// We try to grab the generic CPU temp as a proxy or 0 if unknown.
+		// A future improvement could try OpenHardwareMonitor specifically for this GPU.
+		temp := 0 
+		
+		gpuInfo.Devices = append(gpuInfo.Devices, GPUDevice{
+			Vendor:             vendor,
+			Model:              card.Name,
+			UtilizationPercent: 0, // Not easily available via WMI
+			MemoryUsedMB:       0,
+			MemoryTotalMB:      ramMB,
+			TemperatureCelsius: temp,
+			Status:             "ok",
+		})
+	}
+
+	if len(gpuInfo.Devices) > 0 {
+		gpuInfo.Status = "ok"
+		gpuInfo.Count = len(gpuInfo.Devices)
+	}
+
+	return gpuInfo
+}
+
 func metricsHandler(w http.ResponseWriter, r *http.Request) {
 	metrics, err := collectMetrics()
 	if err != nil {
@@ -598,6 +687,31 @@ func metricsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	json.NewEncoder(w).Encode(metrics)
+}
+
+func refreshHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	metrics, err := collectMetrics()
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Error collecting metrics: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	// Force write to file
+	if err := writeMetricsToFile(metrics); err != nil {
+		log.Printf("[ERROR] Failed to write metrics to file during refresh: %v", err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"status":    "success",
+		"message":   "Native metrics refreshed and written to file",
+		"timestamp": metrics.Timestamp,
+	})
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
@@ -670,6 +784,7 @@ func startPeriodicFileWriter() {
 
 func main() {
 	http.HandleFunc("/metrics", metricsHandler)
+	http.HandleFunc("/refresh", refreshHandler)
 	http.HandleFunc("/health", healthHandler)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		response := map[string]interface{}{

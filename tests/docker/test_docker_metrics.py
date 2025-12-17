@@ -414,5 +414,155 @@ class TestGracefulDegradation:
         assert exit_code == 0
 
 
+class TestMetricsEdgeCases:
+    """Test edge cases in metrics collection."""
+    
+    def test_high_cpu_usage_handling(self, container):
+        """Test handling of very high CPU usage values."""
+        # CPU usage should never exceed 100%
+        container.exec_run("/app/scripts/main_monitor.sh")
+        time.sleep(2)
+        
+        exit_code, output = container.exec_run(
+            "cat /app/data/metrics/current.json"
+        )
+        metrics = json.loads(output.decode())
+        
+        cpu_usage = metrics.get("cpu", {}).get("usage_percent", 0)
+        
+        # Validate range
+        assert 0 <= cpu_usage <= 100, f"Invalid CPU usage: {cpu_usage}"
+    
+    def test_memory_percentage_validation(self, container):
+        """Test memory percentage is within valid range."""
+        container.exec_run("/app/scripts/main_monitor.sh")
+        time.sleep(2)
+        
+        exit_code, output = container.exec_run(
+            "cat /app/data/metrics/current.json"
+        )
+        metrics = json.loads(output.decode())
+        
+        mem_usage = metrics.get("memory", {}).get("usage_percent", 0)
+        
+        assert 0 <= mem_usage <= 100, f"Invalid memory usage: {mem_usage}"
+    
+    def test_disk_usage_validation(self, container):
+        """Test disk usage percentages are valid."""
+        container.exec_run("/app/scripts/main_monitor.sh")
+        time.sleep(2)
+        
+        exit_code, output = container.exec_run(
+            "cat /app/data/metrics/current.json"
+        )
+        metrics = json.loads(output.decode())
+        
+        disks = metrics.get("disk", [])
+        
+        for disk in disks:
+            usage = disk.get("used_percent", 0)
+            assert 0 <= usage <= 100, f"Invalid disk usage for {disk.get('device')}: {usage}"
+    
+    def test_network_bytes_non_negative(self, container):
+        """Test network bytes are non-negative."""
+        container.exec_run("/app/scripts/main_monitor.sh")
+        time.sleep(2)
+        
+        exit_code, output = container.exec_run(
+            "cat /app/data/metrics/current.json"
+        )
+        metrics = json.loads(output.decode())
+        
+        network = metrics.get("network", [])
+        
+        for iface in network:
+            rx = iface.get("rx_bytes", 0)
+            tx = iface.get("tx_bytes", 0)
+            
+            assert rx >= 0, f"Negative RX bytes for {iface.get('iface')}"
+            assert tx >= 0, f"Negative TX bytes for {iface.get('iface')}"
+
+
+class TestTimestampValidation:
+    """Test timestamp format and validity."""
+    
+    def test_timestamp_format(self, container):
+        """Test timestamp is in ISO 8601 format."""
+        container.exec_run("/app/scripts/main_monitor.sh")
+        time.sleep(2)
+        
+        exit_code, output = container.exec_run(
+            "cat /app/data/metrics/current.json"
+        )
+        metrics = json.loads(output.decode())
+        
+        timestamp = metrics.get("timestamp")
+        
+        assert timestamp is not None
+        # Should contain 'T' and 'Z' for ISO format
+        assert 'T' in timestamp
+        assert timestamp.endswith('Z')
+    
+    def test_timestamp_parseable(self, container):
+        """Test timestamp can be parsed as datetime."""
+        from datetime import datetime
+        
+        container.exec_run("/app/scripts/main_monitor.sh")
+        time.sleep(2)
+        
+        exit_code, output = container.exec_run(
+            "cat /app/data/metrics/current.json"
+        )
+        metrics = json.loads(output.decode())
+        
+        timestamp = metrics.get("timestamp")
+        
+        # Should be parseable
+        try:
+            dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+            assert dt is not None
+        except ValueError:
+            pytest.fail(f"Invalid timestamp format: {timestamp}")
+
+
+class TestDataConsistency:
+    """Test data consistency across multiple runs."""
+    
+    def test_multiple_runs_produce_valid_json(self, container):
+        """Test multiple monitor runs all produce valid JSON."""
+        for i in range(3):
+            container.exec_run("/app/scripts/main_monitor.sh")
+            time.sleep(2)
+            
+            exit_code, output = container.exec_run(
+                "cat /app/data/metrics/current.json"
+            )
+            
+            assert exit_code == 0
+            
+            try:
+                metrics = json.loads(output.decode())
+                assert isinstance(metrics, dict)
+            except json.JSONDecodeError:
+                pytest.fail(f"Invalid JSON on run {i+1}")
+    
+    def test_required_fields_always_present(self, container):
+        """Test required fields are present in every run."""
+        required = ["timestamp", "platform", "system", "cpu", "memory"]
+        
+        for i in range(2):
+            container.exec_run("/app/scripts/main_monitor.sh")
+            time.sleep(2)
+            
+            exit_code, output = container.exec_run(
+                "cat /app/data/metrics/current.json"
+            )
+            metrics = json.loads(output.decode())
+            
+            for field in required:
+                assert field in metrics, f"Missing {field} on run {i+1}"
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "--tb=short"])
+

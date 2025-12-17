@@ -7,193 +7,242 @@
     <title>System Monitor Report | {{ generated_at }}</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --success: #16a34a;
-            --warning: #ca8a04;
-            --danger: #dc2626;
-            --dark: #0f172a;
-            --light: #f8fafc;
+            /* Professional Light Theme Palette */
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+
+            --primary: #3b82f6;
+            /* Blue for Guest/General */
+            --accent: #22c55e;
+            /* Green for Host */
+
+            --success-bg: #dcfce7;
+            --success-text: #166534;
+            --warning-bg: #fef3c7;
+            --warning-text: #92400e;
+            --danger-bg: #fee2e2;
+            --danger-text: #991b1b;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #f1f5f9;
-            color: #334155;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             margin: 0;
             padding: 40px;
-            line-height: 1.5;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             overflow: hidden;
         }
 
+        /* HEADER */
         header {
-            background: var(--dark);
-            color: white;
-            padding: 30px;
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 30px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        h1 {
+        .header-title h1 {
             margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.025em;
+        }
+
+        .header-mdata {
+            text-align: right;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* DUAL COLUMN LAYOUT */
+        .dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .dual-grid>.column:first-child {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .column {
+            padding: 30px;
+        }
+
+        /* Handling case where only one source is available */
+        .dual-grid.single-col {
+            grid-template-columns: 1fr;
+        }
+
+        .col-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .col-icon {
             font-size: 1.5rem;
+            margin-right: 12px;
+        }
+
+        .col-title {
+            font-size: 1.25rem;
             font-weight: 600;
+            color: var(--text-main);
         }
 
-        .subtitle {
-            opacity: 0.8;
-            font-size: 0.9rem;
-            margin-top: 5px;
+        .col-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-left: auto;
         }
 
-        .content {
-            padding: 40px;
+        /* METRIC CARDS */
+        .metric-group {
+            margin-bottom: 25px;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
         }
 
-        .section {
-            margin-bottom: 40px;
-            break-inside: avoid;
+        .mg-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
-        .section-title {
-            font-size: 1.1rem;
-            color: var(--dark);
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+        .mg-title {
+            font-size: 0.875rem;
             font-weight: 600;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        .grid {
-            display: grid;
-            gap: 20px;
+        .mg-val {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
         }
 
-        .grid-2 {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .grid-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px;
-        }
-
-        .label {
-            font-size: 0.75rem;
-            color: #64748b;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .value {
-            font-size: 1.25rem;
-            color: #0f172a;
-            font-weight: 500;
+        .mg-detail {
+            font-size: 0.875rem;
+            color: var(--text-muted);
             margin-top: 5px;
         }
 
-        .value.small {
-            font-size: 1rem;
-        }
-
-        .stats-bar {
-            height: 8px;
+        /* PROGRESS BARS */
+        .prog-track {
+            height: 6px;
             background: #e2e8f0;
-            border-radius: 4px;
-            margin-top: 10px;
+            border-radius: 3px;
+            margin-top: 12px;
             overflow: hidden;
         }
 
-        .bar-fill {
+        .prog-fill {
             height: 100%;
-            transition: width 0.3s;
+            border-radius: 3px;
         }
 
-        .bar-fill.success {
-            background: var(--success);
+        /* LISTS (Disks, etc) */
+        .data-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .bar-fill.warning {
-            background: var(--warning);
-        }
-
-        .bar-fill.danger {
-            background: var(--danger);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
             font-size: 0.9rem;
         }
 
-        th {
-            text-align: left;
-            color: #64748b;
-            font-weight: 600;
-            border-bottom: 1px solid #cbd5e1;
-            padding: 10px;
-        }
-
-        td {
-            padding: 10px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        tr:last-child td {
+        .data-item:last-child {
             border-bottom: none;
+        }
+
+        /* UTILITIES */
+        .text-success {
+            color: var(--success-text);
+        }
+
+        .text-warning {
+            color: var(--warning-text);
+        }
+
+        .text-danger {
+            color: var(--danger-text);
+        }
+
+        .bg-success {
+            background-color: var(--accent);
+        }
+
+        .bg-warning {
+            background-color: #f59e0b;
+        }
+
+        .bg-danger {
+            background-color: #ef4444;
         }
 
         .badge {
             display: inline-block;
             padding: 2px 8px;
-            border-radius: 12px;
+            border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 600;
-            background: #e2e8f0;
-            color: #475569;
         }
 
-        .badge.critical {
-            background: #fee2e2;
-            color: #991b1b;
+        .badge-success {
+            background: var(--success-bg);
+            color: var(--success-text);
         }
 
-        .badge.warning {
-            background: #fef3c7;
-            color: #92400e;
+        .badge-warning {
+            background: var(--warning-bg);
+            color: var(--warning-text);
         }
 
-        .badge.success {
-            background: #dcfce7;
-            color: #166534;
+        .badge-danger {
+            background: var(--danger-bg);
+            color: var(--danger-text);
         }
 
-        .footer {
+        footer {
             background: #f1f5f9;
             padding: 20px;
             text-align: center;
             font-size: 0.8rem;
-            color: #64748b;
-            border-top: 1px solid #e2e8f0;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
         }
 
+        /* PRINT OPTIMIZATION */
         @media print {
             body {
                 padding: 0;
@@ -202,7 +251,7 @@
 
             .container {
                 box-shadow: none;
-                max-width: 100%;
+                border: none;
             }
         }
     </style>
@@ -211,155 +260,249 @@
 <body>
     <div class="container">
         <header>
-            <div>
-                <h1>System Health Report</h1>
-                <div class="subtitle">{{ generated_at }}</div>
+            <div class="header-title">
+                <h1>System Observability Report</h1>
+                <div style="margin-top:5px; font-weight:500; color:#64748b;">Detailed Performance Metrics</div>
             </div>
-            <div style="text-align: right">
-                <div class="label" style="color: rgba(255,255,255,0.7)">Host</div>
-                <div style="font-size: 1.2rem">{{ metrics.system.hostname }}</div>
+            <div class="header-mdata">
+                <div><strong>Generated:</strong> {{ generated_at }}</div>
+                <div>System Monitor v5.0</div>
             </div>
         </header>
 
-        <div class="content">
-            <!-- System Overview -->
-            <div class="section">
-                <div class="section-title">System Overview</div>
-                <div class="grid grid-2">
-                    <div class="card">
-                        <div class="label">Platform</div>
-                        <div class="value small">{{ metrics.system.os }} <span style="color: #64748b">({{
-                                metrics.system.kernel }})</span></div>
-                    </div>
-                    <div class="card">
-                        <div class="label">Uptime</div>
-                        <div class="value small">{{ ((metrics.system.uptime_seconds | default(0) | int) / 3600) |
-                            round(1) }} Hours</div>
-                    </div>
+        {% set has_native = native is not none %}
+        {% set has_legacy = legacy is not none %}
+
+        <div class="dual-grid {{ 'single-col' if not (has_native and has_legacy) }}">
+
+            <!-- COLUMN 1: WINDOWS HOST (NATIVE) -->
+            {% if has_native %}
+            <div class="column">
+                <div class="col-header" style="border-color: var(--accent);">
+                    <div class="col-title">Windows Host</div>
+                    <div class="col-subtitle">Native Agent</div>
                 </div>
-            </div>
 
-            <!-- CPU & Memory -->
-            <div class="section">
-                <div class="section-title">Performance</div>
-                <div class="grid grid-2">
-                    <!-- CPU -->
-                    <div class="card">
-                        {% set cpu_val = metrics.cpu.usage_percent | default(0) | float %}
-                        <div style="display: flex; justify-content: space-between;">
-                            <div class="label">CPU Load</div>
-                            <div class="value">{{ cpu_val }}%</div>
+                <!-- Host Info -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">System</span></div>
+                    <div class="data-list">
+                        <div class="data-item">
+                            <span>Hostname</span>
+                            <strong>{{ native.system.hostname }}</strong>
                         </div>
-                        <div class="stats-bar">
-                            <div class="bar-fill {{ cpu_val | percentage_color }}" style="width: {{ cpu_val }}%"></div>
+                        <div class="data-item">
+                            <span>OS</span>
+                            <span>{{ native.system.os }}</span>
                         </div>
-                        <div style="margin-top: 15px">
-                            <div class="label">Details</div>
-                            <div style="font-size: 0.9rem; margin-top: 5px">{{ metrics.cpu.model | default('Unknown
-                                CPU') }}</div>
-                        </div>
-                    </div>
-
-                    <!-- Memory -->
-                    <div class="card">
-                        {# Safe variable calculation with defaults #}
-                        {% set mem = metrics.memory | default({}) %}
-                        {% set mem_used_mb = mem.used_mb | default(0) | float %}
-                        {% set mem_total_mb = mem.total_mb | default(1) | float %}
-                        {# Avoid division by zero #}
-                        {% set mem_total_mb = 1.0 if mem_total_mb == 0 else mem_total_mb %}
-
-                        {% set mem_percent = ((mem_used_mb / mem_total_mb) * 100) | round(1) %}
-                        {% set mem_used_gb = (mem_used_mb / 1024) | round(2) %}
-                        {% set mem_total_gb = (mem_total_mb / 1024) | round(2) %}
-
-                        <div style="display: flex; justify-content: space-between;">
-                            <div class="label">Memory Usage</div>
-                            <div class="value">{{ mem_percent }}%</div>
-                        </div>
-                        <div class="stats-bar">
-                            <div class="bar-fill {{ mem_percent | percentage_color }}"
-                                style="width: {{ mem_percent }}%"></div>
-                        </div>
-                        <div style="display:flex; gap: 15px; margin-top: 15px">
-                            <div>
-                                <div class="label">Used</div>
-                                <div class="value small">{{ mem_used_gb }} GB</div>
-                            </div>
-                            <div>
-                                <div class="label">Total</div>
-                                <div class="value small">{{ mem_total_gb }} GB</div>
-                            </div>
+                        <div class="data-item">
+                            <span>Uptime</span>
+                            <span>{{ ((native.system.uptime_seconds | default(0) | int) / 3600) | round(1) }}h</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Storage -->
-            <div class="section">
-                <div class="section-title">Storage</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Location</th>
-                            <th>Filesystem</th>
-                            <th>Usage</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for disk in metrics.disk %}
-                        <tr>
-                            <td>{{ disk.device }}</td>
-                            <td>{{ disk.filesystem }}</td>
-                            <td>
-                                {{ disk.used_percent | default(0) }}%
-                                <span style="color: #94a3b8; font-size: 0.8em">({{ disk.used_gb | default(0) | round(1)
-                                    }}/{{
-                                    disk.total_gb | default(0) | round(1) }} GB)</span>
-                            </td>
-                            <td>
-                                <span
-                                    class="badge {{ 'success' if (disk.used_percent|default(0)) < 80 else ('warning' if (disk.used_percent|default(0)) < 90 else 'critical') }}">
-                                    {{ 'OK' if (disk.used_percent|default(0)) < 80 else ('WARN' if
-                                        (disk.used_percent|default(0)) < 90 else 'FULL' ) }} </span>
-                            </td>
-                        </tr>
+                <!-- CPU -->
+                <div class="metric-group">
+                    <div class="mg-header">
+                        <span class="mg-title">CPU Processor</span>
+                        <div class="badge badge-success">Active</div>
+                    </div>
+                    {% set cpu_val = native.cpu.usage_percent | default(0) | float %}
+                    <div class="mg-val">{{ cpu_val }}%</div>
+                    <div class="prog-track">
+                        <div class="prog-fill {{ cpu_val | percentage_color }}" style="width: {{ cpu_val }}%"></div>
+                    </div>
+                    <div class="mg-detail">{{ native.cpu.model }}</div>
+                    <div class="mg-detail">{{ native.cpu.logical_processors }} Cores | Temp: {{
+                        native.temperature.cpu_celsius | default('N/A') }}°C</div>
+                </div>
+
+                <!-- Memory -->
+                <div class="metric-group">
+                    {% set mem = native.memory %}
+                    <div class="mg-header"><span class="mg-title">Memory</span></div>
+                    <div class="mg-val">{{ mem.usage_percent }}%</div>
+                    <div class="prog-track">
+                        <div class="prog-fill {{ mem.usage_percent | percentage_color }}"
+                            style="width: {{ mem.usage_percent }}%"></div>
+                    </div>
+                    <div class="mg-detail">{{ (mem.used_mb / 1024) | round(1) }} GB used of {{ (mem.total_mb / 1024) |
+                        round(1) }} GB</div>
+                </div>
+
+                <!-- Disk -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">Storage</span></div>
+                    <div class="data-list">
+                        {% for disk in native.disk %}
+                        <div class="data-item">
+                            <div>
+                                <strong>{{ disk.device }}</strong>
+                                <span style="font-size:0.8em; color:#94a3b8">({{ disk.filesystem }})</span>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">{{ disk.used_percent | round(1) }}%</div>
+                                <div style="font-size:0.75em; color:#64748b">{{ (disk.used_gb / 1024) | round(1) }} used
+                                </div>
+                            </div>
+                        </div>
                         {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    </div>
+                </div>
 
-            <!-- GPU -->
-            {% if metrics.gpu.devices %}
-            <div class="section">
-                <div class="section-title">Graphics</div>
-                <div class="grid grid-2">
-                    {% for gpu in metrics.gpu.devices %}
-                    <div class="card">
-                        <div class="label">{{ gpu.vendor }}</div>
-                        <div class="value small">{{ gpu.model }}</div>
-                        <div style="margin-top: 10px; display: flex; gap: 15px;">
-                            <div>
-                                <div class="label">Temp</div>
-                                <div style="font-weight: 500">{{ gpu.temperature_celsius }}°C</div>
-                            </div>
-                            <div>
-                                <div class="label">Util</div>
-                                <div style="font-weight: 500">{{ gpu.utilization_percent }}%</div>
-                            </div>
+                <!-- GPU -->
+                {% if native.gpu.devices %}
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">GPU</span></div>
+                    {% for gpu in native.gpu.devices %}
+                    <div class="data-item" style="display:block;">
+                        <div style="font-weight:600; margin-bottom:4px;">{{ gpu.model }}</div>
+                        <div style="font-size:0.85rem; color:#64748b;">
+                            Temp: {{ gpu.temperature_celsius }}°C | Util: {{ gpu.utilization_percent }}%
                         </div>
                     </div>
                     {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+
+            <!-- COLUMN 2: WSL GUEST (LEGACY) -->
+            {% if has_legacy %}
+            <div class="column" style="background-color: #fafafa;"> <!-- Slight contrast for Guest -->
+                <div class="col-header" style="border-color: #f59e0b;">
+                    <div class="col-title">WSL2 Guest</div>
+                    <div class="col-subtitle">Virtual Environment</div>
+                </div>
+
+                <!-- Host Info -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">System</span></div>
+                    <div class="data-list">
+                        <div class="data-item">
+                            <span>Hostname</span>
+                            <strong>{{ legacy.system.hostname }}</strong>
+                        </div>
+                        <div class="data-item">
+                            <span>OS</span>
+                            <span>{{ legacy.system.os }}</span>
+                        </div>
+                        <div class="data-item">
+                            <span>Kernel</span>
+                            <span title="{{ legacy.system.kernel }}"
+                                style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:150px;">{{
+                                legacy.system.kernel }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CPU -->
+                <div class="metric-group">
+                    <div class="mg-header">
+                        <span class="mg-title">vCPU Processor</span>
+                    </div>
+                    {% set cpu_val = legacy.cpu.usage_percent | default(0) | float %}
+                    <div class="mg-val">{{ cpu_val }}%</div>
+                    <div class="prog-track">
+                        <div class="prog-fill {{ cpu_val | percentage_color }}" style="width: {{ cpu_val }}%"></div>
+                    </div>
+                    <div class="mg-detail">{{ legacy.cpu.model | truncate(40) }}</div>
+                    <div class="mg-detail">
+                        Load: {{ legacy.cpu.load_1 }} | {{ legacy.cpu.load_5 }} <br>
+                        Temp: {{ legacy.temperature.cpu_celsius | default('N/A') }}°C
+                    </div>
+                </div>
+
+                <!-- Memory -->
+                <div class="metric-group">
+                    {% set mem = legacy.memory %}
+                    <div class="mg-header"><span class="mg-title">Memory</span></div>
+                    <div class="mg-val">{{ mem.usage_percent }}%</div>
+                    <div class="prog-track">
+                        <div class="prog-fill {{ mem.usage_percent | percentage_color }}"
+                            style="width: {{ mem.usage_percent }}%"></div>
+                    </div>
+                    <div class="mg-detail">{{ (mem.used_mb / 1024) | round(1) }} GB used of {{ (mem.total_mb / 1024) |
+                        round(1) }} GB</div>
+                </div>
+
+                <!-- Disk -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">Storage</span></div>
+                    <div class="data-list">
+                        {% for disk in legacy.disk %}
+                        {% if disk.device == '/' or disk.device.startswith('/mnt') %}
+                        <div class="data-item">
+                            <div>
+                                <strong>{{ disk.device }}</strong>
+                            </div>
+                            <div style="text-align:right">
+                                <div style="font-weight:600">{{ disk.used_percent | round(1) }}%</div>
+                                <div style="font-size:0.75em; color:#64748b">{{ disk.used_gb | round(1) }}GB used</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- GPU -->
+                {% if legacy.gpu and legacy.gpu.devices %}
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">GPU</span></div>
+                    {% for gpu in legacy.gpu.devices %}
+                    <div class="data-item" style="display:block;">
+                        <div style="font-weight:600; margin-bottom:4px;">{{ gpu.model | default('Unknown GPU') }}</div>
+                        <div style="font-size:0.85rem; color:#64748b;">
+                            Temp: {{ gpu.temperature_celsius | default('N/A') }}°C | Util: {{ gpu.utilization_percent |
+                            default(0) }}%
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Network Summary -->
+                <div class="metric-group">
+                    <div class="mg-header"><span class="mg-title">Active Interfaces</span></div>
+                    <div class="data-list">
+                        {% for net in legacy.network %}
+                        {% if (net.rx_bytes + net.tx_bytes) > 0 %}
+                        <div class="data-item">
+                            <strong>{{ net.iface }}</strong>
+                            <span style="font-size:0.8rem">RX: {{ net.rx_bytes | format_bytes }} | TX: {{ net.tx_bytes |
+                                format_bytes }}</span>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             {% endif %}
 
         </div>
 
-        <div class="footer">
-            Generated Automatically by System Monitor v5.0
+        {% if alerts %}
+        <div style="padding: 30px; border-top: 1px solid var(--border-color);">
+            <h3 style="margin-top:0; color:var(--text-main);">System Alerts</h3>
+            <div style="display: grid; gap: 10px;">
+                {% for alert in alerts %}
+                <div
+                    style="padding: 10px 15px; border-radius: 6px; background: {{ 'var(--danger-bg)' if alert.level == 'critical' else 'var(--warning-bg)' }}; color: {{ 'var(--danger-text)' if alert.level == 'critical' else 'var(--warning-text)' }};">
+                    <strong>{{ alert.level|upper }}:</strong> {{ alert.message }} <small>({{ alert.timestamp |
+                        format_timestamp }})</small>
+                </div>
+                {% endfor %}
+            </div>
         </div>
+        {% endif %}
+
+        <footer>
+            Generated on {{ generated_at }} • Host: {{ native.system.hostname if native else (legacy.system.hostname if
+            legacy else 'Unknown') }}
+        </footer>
     </div>
 </body>
 

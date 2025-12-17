@@ -84,11 +84,12 @@ class ReportGenerator:
         }
         return level_map.get(level.lower(), 'secondary')
     
-    def generate_report(self, metrics, alerts):
+    def generate_report(self, legacy_metrics, native_metrics, alerts):
         """Generate both HTML and Markdown reports
         
         Args:
-            metrics: Dictionary of system metrics
+            legacy_metrics: Dictionary of legacy (WSL) metrics
+            native_metrics: Dictionary of native (Windows) metrics
             alerts: List of alert dictionaries
             
         Returns:
@@ -99,10 +100,12 @@ class ReportGenerator:
         # Prepare report data
         report_data = {
             'generated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            'metrics': metrics,
+            'legacy': legacy_metrics,
+            'native': native_metrics,
             'alerts': alerts,
             'alert_counts': self._count_alerts_by_level(alerts),
-            'summary': self._generate_summary(metrics)
+            'summary_legacy': self._generate_summary(legacy_metrics),
+            'summary_native': self._generate_summary(native_metrics)
         }
         
         # Generate HTML report
@@ -138,6 +141,9 @@ class ReportGenerator:
     
     def _generate_summary(self, metrics):
         """Generate summary statistics from metrics"""
+        if not metrics:
+            return {}
+            
         summary = {
             'cpu_usage': 0,
             'memory_usage': 0,

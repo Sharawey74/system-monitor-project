@@ -28,11 +28,7 @@ if ! echo "$output" | python3 -m json.tool &>/dev/null && ! echo "$output" | jq 
 fi
 
 # Check for required fields
-if ! echo "$output" | grep -q '"memory"'; then
-    echo "[FAIL] Missing 'memory' field"
-    exit 1
-fi
-
+# Note: Individual monitor output is flat
 if ! echo "$output" | grep -q '"total_mb"'; then
     echo "[FAIL] Missing 'total_mb' field"
     exit 1

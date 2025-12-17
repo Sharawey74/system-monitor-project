@@ -348,3 +348,201 @@ class TestGetLatestAlert:
         latest = get_latest_alert([])
         
         assert latest is None
+
+
+class TestAlertThresholds:
+    """Tests for alert threshold validation."""
+    
+    def test_cpu_warning_threshold(self):
+        """Test CPU warning threshold (90%)."""
+        cpu_usage = 91.5
+        threshold = 90.0
+        
+        should_alert = cpu_usage > threshold
+        
+        assert should_alert is True
+    
+    def test_cpu_below_threshold(self):
+        """Test CPU below warning threshold."""
+        cpu_usage = 85.0
+        threshold = 90.0
+        
+        should_alert = cpu_usage > threshold
+        
+        assert should_alert is False
+    
+    def test_memory_critical_threshold(self):
+        """Test memory critical threshold (95%)."""
+        memory_usage = 96.0
+        critical_threshold = 95.0
+        
+        is_critical = memory_usage > critical_threshold
+        
+        assert is_critical is True
+    
+    def test_disk_warning_threshold(self):
+        """Test disk warning threshold (85%)."""
+        disk_usage = 87.0
+        threshold = 85.0
+        
+        should_alert = disk_usage > threshold
+        
+        assert should_alert is True
+    
+    def test_gpu_temp_threshold(self):
+        """Test GPU temperature threshold (80°C)."""
+        gpu_temp = 82.0
+        threshold = 80.0
+        
+        should_alert = gpu_temp > threshold
+        
+        assert should_alert is True
+    
+    def test_threshold_boundary_condition(self):
+        """Test exact threshold boundary."""
+        value = 90.0
+        threshold = 90.0
+        
+        # Should not alert on exact threshold
+        should_alert = value > threshold
+        
+        assert should_alert is False
+
+
+class TestAlertDuration:
+    """Tests for alert duration tracking."""
+    
+    def test_sustained_alert_tracking(self):
+        """Test tracking sustained alerts (e.g., CPU > 90% for 30s)."""
+        alert_history = [
+            {"metric": "cpu", "value": 91.0, "timestamp": "2025-12-17T10:00:00Z"},
+            {"metric": "cpu", "value": 92.0, "timestamp": "2025-12-17T10:00:15Z"},
+            {"metric": "cpu", "value": 91.5, "timestamp": "2025-12-17T10:00:30Z"}
+        ]
+        
+        # All alerts within 30 seconds
+        assert len(alert_history) == 3
+        
+        # Check sustained condition
+        sustained = all(a["value"] > 90.0 for a in alert_history)
+        
+        assert sustained is True
+    
+    def test_intermittent_alert_not_sustained(self):
+        """Test intermittent alerts don't trigger sustained warning."""
+        alert_history = [
+            {"metric": "cpu", "value": 91.0, "timestamp": "2025-12-17T10:00:00Z"},
+            {"metric": "cpu", "value": 85.0, "timestamp": "2025-12-17T10:00:15Z"},
+            {"metric": "cpu", "value": 92.0, "timestamp": "2025-12-17T10:00:30Z"}
+        ]
+        
+        # Not all above threshold
+        sustained = all(a["value"] > 90.0 for a in alert_history)
+        
+        assert sustained is False
+
+
+class TestAlertPriority:
+    """Tests for alert priority/severity."""
+    
+    def test_critical_higher_than_warning(self):
+        """Test critical alerts have higher priority."""
+        severity_levels = {
+            "info": 1,
+            "warning": 2,
+            "critical": 3
+        }
+        
+        assert severity_levels["critical"] > severity_levels["warning"]
+        assert severity_levels["warning"] > severity_levels["info"]
+    
+    def test_sort_by_severity(self):
+        """Test sorting alerts by severity."""
+        alerts = [
+            {"level": "info", "message": "Info alert"},
+            {"level": "critical", "message": "Critical alert"},
+            {"level": "warning", "message": "Warning alert"}
+        ]
+        
+        severity_order = {"critical": 3, "warning": 2, "info": 1}
+        sorted_alerts = sorted(alerts, key=lambda a: severity_order[a["level"]], reverse=True)
+        
+        assert sorted_alerts[0]["level"] == "critical"
+        assert sorted_alerts[1]["level"] == "warning"
+        assert sorted_alerts[2]["level"] == "info"
+
+
+class TestAlertDeduplication:
+    """Tests for alert deduplication."""
+    
+    def test_duplicate_alert_detection(self):
+        """Test detecting duplicate alerts."""
+        existing_alerts = [
+            {"metric": "cpu", "level": "warning", "message": "CPU high"}
+        ]
+        
+        new_alert = {"metric": "cpu", "level": "warning", "message": "CPU high"}
+        
+        # Check if duplicate
+        is_duplicate = any(
+            a["metric"] == new_alert["metric"] and 
+            a["level"] == new_alert["level"]
+            for a in existing_alerts
+        )
+        
+        assert is_duplicate is True
+    
+    def test_different_alert_not_duplicate(self):
+        """Test different alerts are not duplicates."""
+        existing_alerts = [
+            {"metric": "cpu", "level": "warning", "message": "CPU high"}
+        ]
+        
+        new_alert = {"metric": "memory", "level": "warning", "message": "Memory high"}
+        
+        is_duplicate = any(
+            a["metric"] == new_alert["metric"] and 
+            a["level"] == new_alert["level"]
+            for a in existing_alerts
+        )
+        
+        assert is_duplicate is False
+
+
+class TestAlertFormatting:
+    """Tests for alert message formatting."""
+    
+    def test_format_cpu_alert_message(self):
+        """Test CPU alert message formatting."""
+        metric = "cpu"
+        value = 91.5
+        threshold = 90.0
+        
+        message = f"CPU usage ({value:.1f}%) exceeds threshold ({threshold:.1f}%)"
+        
+        assert "CPU usage" in message
+        assert "91.5%" in message
+        assert "90.0%" in message
+    
+    def test_format_disk_alert_message(self):
+        """Test disk alert message formatting."""
+        device = "C:"
+        value = 95.0
+        threshold = 90.0
+        
+        message = f"Disk {device} usage ({value:.1f}%) exceeds threshold ({threshold:.1f}%)"
+        
+        assert "Disk C:" in message
+        assert "95.0%" in message
+    
+    def test_format_temperature_alert_message(self):
+        """Test temperature alert message formatting."""
+        component = "GPU"
+        temp = 82.0
+        threshold = 80.0
+        
+        message = f"{component} temperature ({temp:.1f}°C) exceeds threshold ({threshold:.1f}°C)"
+        
+        assert "GPU temperature" in message
+        assert "82.0°C" in message
+

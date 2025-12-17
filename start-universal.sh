@@ -105,6 +105,48 @@ fi
 echo -e "${GREEN}✓${NC} Docker found"
 
 
+
+# ============================================
+# STEP -1: Check/Generate Docker Config
+# ============================================
+if [ ! -f "docker-compose.yml" ]; then
+    echo -e "${YELLOW}►${NC} docker-compose.yml not found. Generating default config..."
+    
+    # ---------------------------------------------------------
+    # CONFIGURATION: Replace 'yourusername' below before distributing
+    # ---------------------------------------------------------
+    DOCKER_IMAGE="sharawey74/system-monitor:latest" 
+    
+    cat > docker-compose.yml <<EOF
+version: '3.8'
+
+services:
+  dashboard:
+    image: ${DOCKER_IMAGE}
+    container_name: system-monitor-dashboard
+    
+    # Enable connection to Host API running on native OS
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      
+    ports:
+      - "5000:5000"
+
+    # Minimal volumes for persistence
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+      
+    environment:
+      - HOST_API_URL=http://host.docker.internal:8888
+      - NATIVE_AGENT_URL=http://host.docker.internal:8889
+      - HOST_MONITORING=true
+      
+    restart: unless-stopped
+EOF
+    echo -e "${GREEN}✓${NC} Generated docker-compose.yml (Image: $DOCKER_IMAGE)"
+fi
+
 # ============================================
 # STEP 0: Check/Download Host API Scripts
 # ============================================
@@ -447,17 +489,23 @@ if [ ! -f "docker-compose.yml" ]; then
     
     echo -e "${GREEN}✓${NC} Dashboard container started"
 else
-    # Use docker-compose
+    # Use docker-compose or docker compose
+    if command -v docker-compose &> /dev/null; then
+        COMPOSE_CMD="docker-compose"
+    else
+        COMPOSE_CMD="docker compose"
+    fi
+
     echo -e "${YELLOW}►${NC} Stopping old containers..."
-    docker-compose down 2>/dev/null || true
+    $COMPOSE_CMD down 2>/dev/null || true
     
     echo -e "${YELLOW}►${NC} Building and starting Dashboard container..."
-    if docker-compose up --build -d 2>&1 | grep -v "WARN.*version.*obsolete"; then
+    if $COMPOSE_CMD up --build -d 2>&1 | grep -v "WARN.*version.*obsolete"; then
         echo -e "${GREEN}✓${NC} Dashboard container started"
     else
         echo -e "${RED}✗${NC} Dashboard failed to start"
         echo ""
-        echo "Check logs: docker-compose logs"
+        echo "Check logs: $COMPOSE_CMD logs"
         exit 1
     fi
 fi
