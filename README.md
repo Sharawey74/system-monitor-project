@@ -4,7 +4,10 @@
 ![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
 ![Python](https://img.shields.io/badge/Backend-Python%20%7C%20FastAPI%20%7C%20Flask-yellow)
 ![Go](https://img.shields.io/badge/Agent-Go%201.19+-00ADD8)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%2B%20WSL2%20%2B%20Linux%20%2B%20macOS-lightgrey)
+![Windows](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)
+![Linux](https://img.shields.io/badge/Platform-Linux-FCC624?logo=linux&logoColor=black)
+![macOS](https://img.shields.io/badge/Platform-macOS-000000?logo=apple&logoColor=white)
+![WSL2](https://img.shields.io/badge/Platform-WSL2-4EAA25?logo=linux&logoColor=white)
 
 A **production-grade, cross-platform observability platform** engineered for comprehensive system monitoring across **Windows, Linux, macOS, and WSL2** environments. Features a **dual-agent architecture** offering flexibility and performance:
 
