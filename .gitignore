@@ -1,32 +1,70 @@
 # System Monitor - Git Ignore
 
+# ============================================
+# Runtime Data (DO NOT COMMIT)
+# ============================================
+
+# JSON logs and metrics
+json/*.json
+!json/.gitkeep
+
+# Reports (generated at runtime)
+reports/html/*.html
+reports/markdown/*.md
+!reports/html/.gitkeep
+!reports/markdown/.gitkeep
+
+# Host monitoring output
+Host/output/*.json
+Host/output/temp/
+!Host/output/.gitkeep
+
+# Host2 (Go agent) output
+Host2/bin/go_latest.json
+Host2/bin/host2-agent
+Host2/bin/host2-agent.exe
+Host2/bin/host2-agent-linux
+Host2/bin/host2-agent-darwin
+!Host2/bin/.gitkeep
+
 # Data files (generated at runtime)
 data/logs/*.log
 data/metrics/*.json
+data/alerts/*.json
 !data/logs/.gitkeep
 !data/metrics/.gitkeep
+!data/alerts/.gitkeep
 
-# Temporary files
+# ============================================
+# Temporary Files
+# ============================================
 *.tmp
 *.temp
 ~*
+*.bak
+*.backup
 
-# OS specific
+# ============================================
+# OS Specific
+# ============================================
 .DS_Store
 Thumbs.db
 desktop.ini
+*.lnk
 
-# IDE files
+# ============================================
+# IDE Files
+# ============================================
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+*.sublime-*
 
-# Optional: Uncomment if you want users to download libraries themselves
-# libs/*.dll
-
-# Python cache and bytecode
+# ============================================
+# Python
+# ============================================
 __pycache__/
 *.py[cod]
 *$py.class
@@ -48,14 +86,50 @@ wheels/
 .installed.cfg
 *.egg
 PIPFILE.lock
-
-# Keep README files
-!libs/README.md
-!docs/README.md
-
-# Python cache
-__pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.hypothesis/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# ============================================
+# Go
+# ============================================
+# Compiled binaries are already excluded above in Host2/bin/
+
+# ============================================
+# Docker
+# ============================================
+# Keep docker-compose.yml but ignore overrides
+docker-compose.override.yml
+
+# ============================================
+# Logs
+# ============================================
+*.log
+logs/
+/tmp/
+*.pid
+
+# ============================================
+# Keep Important Files
+# ============================================
+!libs/README.md
+!docs/README.md
+!data/logs/.gitkeep
+!data/metrics/.gitkeep
+!data/alerts/.gitkeep
+!json/.gitkeep
+!reports/html/.gitkeep
+!reports/markdown/.gitkeep
+!Host/output/.gitkeep
+!Host2/bin/.gitkeep
